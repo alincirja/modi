@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alincirja/anaiddelicia.git"
+    "url": "git+https://github.com/alincirja/modi.git"
   },
-  "author": "Diana Luciana Cirja",
+  "author": "Silvia",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alincirja/anaiddelicia/issues"
+    "url": "https://github.com/alincirja/modi/issues"
   },
-  "homepage": "https://github.com/alincirja/anaiddelicia#readme"
+  "homepage": "https://github.com/alincirja/modi#readme"
 }
