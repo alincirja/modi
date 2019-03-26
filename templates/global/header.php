@@ -1,20 +1,3 @@
-<?php
-    session_start();
-    include_once "inc/global-variables.php";
-?>
-
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><?php echo isset($pageTitle) ? $pageTitle : SITE . " | " . TAGLINE; ?></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="<?php echo PATH_STATIC . "css/style.css"; ?>">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -22,17 +5,32 @@
         <![endif]-->
         <header id="header" class="site-header">
             <div class="container">
-                <div class="row">
-                    <div class="col-4 col-lg-3 col-xl-2">
+                <div class="row align-items-center">
+                    <div class="col-4 col-lg-auto order-1">
                         <div class="site-logo">
                             <a href="<?php echo ROOT_URL; ?>" title="<?php echo SITE; ?>"><?php echo SITE; ?></a>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-9 col-xl-10">
+                    <div class="col-4 d-lg-none">
+                        <button class="menu-toggle">
+                            <span class="line line-1"></span>
+                            <span class="line line-2"></span>
+                            <span class="line line-3"></span>
+                        </button>
+                    </div>
+                    <div class="col-4 col-lg-auto pl-0 order-3">
+                        <div class="minicart">
+                            <div class="icon">
+                                <span><i class="fas fa-shopping-basket"></i></span>
+                                <small class="badge badge-danger">0</small>
+                            </div>
+                        </div><!--/.mini-cart-->
+                    </div>
+                    <div class="col-12 col-lg-auto order-4 ml-auto order-lg-2">
                         <nav id="nav" class="site-nav">
                             <ul class="nav">
                                 <li><a href="<?php echo ROOT_URL; ?>">Acasa</a></li>
-                                <li><a href="<?php echo ROOT_URL; ?>">Meniu</a>
+                                <li class="dropdown"><a href="<?php echo ROOT_URL; ?>">Meniu <i class="fas fa-chevron-down"></i></a>
                                     <ul class="nav-submenu">
                                         <li><a href="#">Cumparaturi</a>
                                             <ul class="nav--submenu">
@@ -53,10 +51,10 @@
                                         <li><a href="#">Promotii</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="<?php echo ROOT_URL; ?>">Despre</a></li>
-                                <li><a href="<?php echo ROOT_URL; ?>">Q&A</a></li>
-                                <li><a href="<?php echo ROOT_URL; ?>">Feedback</a></li>
-                                <li><a href="<?php echo ROOT_URL; ?>">Contact</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>about">Despre</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>faq">Q&A</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>feedback">Feedback</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>contact">Contact</a></li>
                             </ul>
                         </nav>
                     </div>

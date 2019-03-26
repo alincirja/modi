@@ -1,0 +1,41 @@
+.site-footer {
+    border-top: 3px solid $primary;
+    background-color: $darkgrey;
+    padding: 35px 0 25px;
+    font-size: 14px;
+
+    h6 {
+        color: $white;
+        margin: 0 0 10px;
+
+        &:after {
+            content: "";
+            height: 1px;
+            width: 35px;
+            display: block;
+            margin: 10px 0 0 0;
+            background-color: $primary;
+        }
+    }
+
+    ul {
+        li {
+            margin: 0 0 5px;
+        }
+    }
+
+    a {
+        color: $text;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    .copy {
+        text-align: center;
+        border-top: 1px solid rgba($white, .1);
+        padding-top: 15px;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,108 @@
+.site-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+
+    .site-logo {
+        a {
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 1;
+            text-transform: uppercase;
+            color: $white;
+        }
+    }
+}
+
+.site-nav {
+    .nav {
+        list-style: none;
+
+        &-submenu,
+        &--submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            position: absolute;
+            min-width: 150px;
+
+            > li {
+                > a {
+                    display: block;
+                    padding: 10px 15px;
+                }
+
+                + li {
+                    border-top: 1px solid rgba($black, .1);
+                }
+            }
+        }
+
+        &-submenu {
+            border-top: 2px solid $primary;
+            background-color: $white;
+
+            > li {
+                position: relative;
+
+                > a {
+                    border-right: 2px solid transparent;
+                }
+
+                &:hover {
+                    > a {
+                        border-right-color: $primary;
+                    }
+                }
+            }
+        }
+
+        &--submenu {
+            background-color: $primary;
+            left: 100%;
+            top: 0;
+
+            > li {
+                > a {
+                    color: $white;
+
+                    &:hover {
+                        background-color: rgba($white, .25);
+                    }
+                }
+            }
+        }
+
+        > li {
+            > a {
+                display: block;
+                color: darken($white, 15%);
+                font-size: 12px;
+                text-transform: uppercase;
+                font-weight: 500;
+                padding: 30px 15px;
+            }
+
+            &:hover {
+                > a {
+                    color: $white;
+                }
+
+                > .nav-submenu {
+                    display: block;
+
+                    > li {
+                        &:hover {
+                            > .nav--submenu {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

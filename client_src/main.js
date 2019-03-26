@@ -1,12 +1,14 @@
 /**
  *  BUILDING SCSS
  */
-require('./style.scss');
+require("./style.scss");
 
 /**
  *  COMPILING JAVASCRIPT
  */
-require('bootstrap/dist/js/bootstrap');
+require("bootstrap/dist/js/bootstrap");
+
+require("./js/global");
 
 
 /**

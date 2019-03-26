@@ -27,3 +27,34 @@ function isAdmin() {
         return false;
     }
 }
+
+// check for home page
+function isHome() {
+    return basename($_SERVER['PHP_SELF']) === "index.php" ? true : false;
+}
+
+// set page heading
+function setPageHeading($heading) {
+    include_once "templates/global/page-heading.php";
+}
+
+// SEO
+function setSeo($slug = "index") {
+    $seo = array(
+        "index" => array (
+            "title" => SITE . " | " . TAGLINE,
+            "description" => TAGLINE,
+            "keywords" => "key word for searching purpose"
+        ),
+        "contact" => array(
+            "title" => "Contact | " . SITE,
+            "description" => TAGLINE,
+            "keywords" => "contact modi caritate"
+        )
+    );
+
+    echo "<title>" . $seo[$slug]["title"] . "</title>";
+    echo "<meta name='description' content='" . $seo[$slug]["description"] . "'>";
+    echo "<meta name='keywords' content='" . $seo[$slug]["keywords"] . "'>";
+    echo "<meta name='author' content='Silvia Brassoi'>";
+}
