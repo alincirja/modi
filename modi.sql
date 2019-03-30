@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Mar 2019 la 09:59
--- Versiune server: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Generation Time: Mar 30, 2019 at 10:32 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `address`
+-- Table structure for table `address`
 --
 
 CREATE TABLE `address` (
@@ -38,10 +38,18 @@ CREATE TABLE `address` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`id`, `address_name`, `address`, `city`, `county`, `postal_code`, `id_user`) VALUES
+(1, 'Brasov', 'strada universitatii, brasov', 'brasov', 'Romania', '234567', 1),
+(2, 'Brasov', 'strada universitatii, brasov', 'brasov', 'Romania', '234575', 1);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `event`
+-- Table structure for table `event`
 --
 
 CREATE TABLE `event` (
@@ -53,10 +61,20 @@ CREATE TABLE `event` (
   `id_category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `name`, `id_image`, `details`, `date_time`, `id_category`) VALUES
+(1, 'concert', 1, 'bla bla', '0000-00-00 00:00:00', 5),
+(2, 'concert', 1, 'bla bla', '2003-03-02 10:00:00', 5),
+(3, 'airfestival', 1, 'frumos', '2019-03-30 07:37:00', 4),
+(4, 'teatrul sica alexandrescu', 1, 'comedie', '2019-03-28 12:00:00', 2);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `event_category`
+-- Table structure for table `event_category`
 --
 
 CREATE TABLE `event_category` (
@@ -66,7 +84,7 @@ CREATE TABLE `event_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Salvarea datelor din tabel `event_category`
+-- Dumping data for table `event_category`
 --
 
 INSERT INTO `event_category` (`id`, `slug`, `name`) VALUES
@@ -79,7 +97,7 @@ INSERT INTO `event_category` (`id`, `slug`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `image`
+-- Table structure for table `image`
 --
 
 CREATE TABLE `image` (
@@ -90,7 +108,7 @@ CREATE TABLE `image` (
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `order`
+-- Table structure for table `order`
 --
 
 CREATE TABLE `order` (
@@ -100,10 +118,17 @@ CREATE TABLE `order` (
   `details` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `date`, `id_user`, `details`) VALUES
+(1, '2019-03-30 09:15:08', 1, 'ciocolata, banane, dulciuri');
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `order_event`
+-- Table structure for table `order_event`
 --
 
 CREATE TABLE `order_event` (
@@ -112,10 +137,17 @@ CREATE TABLE `order_event` (
   `id_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `order_event`
+--
+
+INSERT INTO `order_event` (`id`, `id_event`, `id_order`) VALUES
+(1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `order_product`
+-- Table structure for table `order_product`
 --
 
 CREATE TABLE `order_product` (
@@ -124,10 +156,17 @@ CREATE TABLE `order_product` (
   `id_order` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `order_product`
+--
+
+INSERT INTO `order_product` (`id`, `id_product`, `id_order`) VALUES
+(1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -140,10 +179,20 @@ CREATE TABLE `product` (
   `id_category` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `price`, `description`, `id_image`, `id_store`, `id_category`) VALUES
+(1, 'ciocolata', 5, 'foarte buna', NULL, 1, 1),
+(2, 'prajituri', 10, 'delicioase', NULL, 2, 2),
+(4, 'nurofen', 25, 'sa nu iei niciodata', NULL, 5, 3),
+(5, 'bla', 67, 'nu stiu', NULL, 6, 4);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `product_category`
+-- Table structure for table `product_category`
 --
 
 CREATE TABLE `product_category` (
@@ -153,7 +202,7 @@ CREATE TABLE `product_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Salvarea datelor din tabel `product_category`
+-- Dumping data for table `product_category`
 --
 
 INSERT INTO `product_category` (`id`, `slug`, `name`) VALUES
@@ -164,7 +213,7 @@ INSERT INTO `product_category` (`id`, `slug`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `product_image`
+-- Table structure for table `product_image`
 --
 
 CREATE TABLE `product_image` (
@@ -176,7 +225,7 @@ CREATE TABLE `product_image` (
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `promotion`
+-- Table structure for table `promotion`
 --
 
 CREATE TABLE `promotion` (
@@ -187,10 +236,17 @@ CREATE TABLE `promotion` (
   `id_type` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `promotion`
+--
+
+INSERT INTO `promotion` (`id`, `name`, `date_start`, `date_end`, `id_type`) VALUES
+(1, 'reducere', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `promotion_product`
+-- Table structure for table `promotion_product`
 --
 
 CREATE TABLE `promotion_product` (
@@ -204,7 +260,7 @@ CREATE TABLE `promotion_product` (
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `promotion_type`
+-- Table structure for table `promotion_type`
 --
 
 CREATE TABLE `promotion_type` (
@@ -213,7 +269,7 @@ CREATE TABLE `promotion_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Salvarea datelor din tabel `promotion_type`
+-- Dumping data for table `promotion_type`
 --
 
 INSERT INTO `promotion_type` (`id`, `name`) VALUES
@@ -223,7 +279,7 @@ INSERT INTO `promotion_type` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `store`
+-- Table structure for table `store`
 --
 
 CREATE TABLE `store` (
@@ -233,10 +289,20 @@ CREATE TABLE `store` (
   `id_image` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `store`
+--
+
+INSERT INTO `store` (`id`, `name`, `type`, `id_image`) VALUES
+(1, 'lidl', 'aliimentar', 1),
+(2, 'kaufland', 'alimentar', 1),
+(5, 'catena', 'medicamente', 1),
+(6, 'bla', 'menaj', 1);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -251,7 +317,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Salvarea datelor din tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `register_date`, `rights`, `phone`) VALUES
@@ -376,13 +442,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `event_category`
@@ -400,25 +466,25 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_event`
 --
 ALTER TABLE `order_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -436,7 +502,7 @@ ALTER TABLE `product_image`
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `promotion_product`
@@ -448,7 +514,7 @@ ALTER TABLE `promotion_product`
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -457,11 +523,11 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Restrictii pentru tabele sterse
+-- Constraints for dumped tables
 --
 
 --
--- Restrictii pentru tabele `event`
+-- Constraints for table `event`
 --
 ALTER TABLE `event`
   ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `event_category` (`id`);
