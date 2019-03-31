@@ -1,0 +1,23 @@
+.account-nav {
+    margin: 0;
+
+    li {
+        &:not(:last-child) {
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba($black, .05);
+        }
+
+        a {
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-block;
+
+            &.active {
+                padding-left: 5px;
+                border-left: 2px solid $primary;
+            }
+        }
+    }
+}

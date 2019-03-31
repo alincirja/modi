@@ -3,6 +3,11 @@
 
     include_once "templates/global/head.php";
 
+    if (loggedIn()) {
+        header("Location: account");
+        exit();
+    }
+
     setSeo();
 
     include_once "templates/global/header.php";
@@ -14,6 +19,7 @@
 
         case "reset":
             setPageHeading("Resetare Parola");
+            break;
 
         default:
             setPageHeading("Autentificare");

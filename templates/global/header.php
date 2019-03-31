@@ -22,7 +22,12 @@
                         <div class="minicart">
                             <div class="icon">
                                 <span><i class="fas fa-shopping-basket"></i></span>
-                                <small class="badge badge-danger">0</small>
+                                <small class="badge badge-danger"><?php echo isset($_SESSION["cart_articles"]) ? count($_SESSION["cart_articles"]) : 0; ?></small>
+                            </div>
+                            <div class="minicart-container" id="minicartContainer">
+                            <?php if (isset($_SESSION["cart_articles"]) && count($_SESSION["cart_articles"])) {
+                                include_once "templates/checkout/minicart.php";
+                            } ?>
                             </div>
                         </div><!--/.mini-cart-->
                     </div>
@@ -30,7 +35,7 @@
                         <nav id="nav" class="site-nav">
                             <ul class="nav">
                                 <li><a href="<?php echo ROOT_URL; ?>">Acasa</a></li>
-                                <li class="dropdown"><a href="<?php echo ROOT_URL; ?>">Meniu <i class="fas fa-chevron-down"></i></a>
+                                <li class="dropdown"><a href="<?php echo ROOT_URL; ?>shop">Modi Shop <i class="fas fa-chevron-down"></i></a>
                                     <ul class="nav-submenu">
                                         <li><a href="#">Cumparaturi</a>
                                             <ul class="nav--submenu">

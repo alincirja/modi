@@ -2,6 +2,7 @@
 // Site Vars
 define("SITE", "Modi");
 define("TAGLINE", "Ajutorul tau de incredere");
+define("CURRENCY", "RON");
 
 // Define URL
 define("ROOT_PATH", "/modi/");
@@ -9,6 +10,8 @@ define("ROOT_URL", "http://localhost/modi/");
 
 define("PATH_STATIC", ROOT_PATH . "static/");
 define("PATH_IMG", PATH_STATIC . "img/");
+
+define("LOGOUT", ROOT_PATH . "scripts/user/logout.php?session=end");
 
 // Check logged usser
 function loggedIn() {
@@ -21,7 +24,7 @@ function loggedIn() {
 
 // Check for admin
 function isAdmin() {
-    if (isset($_SESSION["rights"]) && $_SESSION["rights"] == "admin") {
+    if (isset($_SESSION["rights"]) && $_SESSION["rights"] === "admin") {
         return true;
     } else {
         return false;

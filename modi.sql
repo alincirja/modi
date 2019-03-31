@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 30 Mar 2019 la 09:59
+-- Gazdă: 127.0.0.1
+-- Timp de generare: mart. 31, 2019 la 06:44 PM
 -- Versiune server: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Versiune PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `modi`
+-- Bază de date: `modi`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `address`
+-- Structură tabel pentru tabel `address`
 --
 
 CREATE TABLE `address` (
@@ -38,48 +38,108 @@ CREATE TABLE `address` (
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Eliminarea datelor din tabel `address`
+--
+
+INSERT INTO `address` (`id`, `address_name`, `address`, `city`, `county`, `postal_code`, `id_user`) VALUES
+(1, 'Brasov', 'strada universitatii, brasov', 'brasov', 'Romania', '234567', 1),
+(2, 'Brasov', 'strada universitatii, brasov', 'brasov', 'Romania', '234575', 1);
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `event`
+-- Structură tabel pentru tabel `article`
 --
 
-CREATE TABLE `event` (
+CREATE TABLE `article` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
+  `name` varchar(99) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `description` longtext,
+  `date_start` datetime DEFAULT NULL,
+  `date_end` datetime DEFAULT NULL,
+  `price_min` double NOT NULL,
+  `price_max` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Eliminarea datelor din tabel `article`
+--
+
+INSERT INTO `article` (`id`, `name`, `id_category`, `description`, `date_start`, `date_end`, `price_min`, `price_max`) VALUES
+(1, 'Paine', 26, NULL, NULL, NULL, 1.2, 12),
+(2, 'Antonia', 32, NULL, '2019-04-30 20:00:00', NULL, 25, 100);
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `article_image`
+--
+
+CREATE TABLE `article_image` (
+  `id` int(11) NOT NULL,
+  `id_article` int(11) NOT NULL,
   `id_image` int(11) NOT NULL,
-  `details` longtext NOT NULL,
-  `date_time` datetime NOT NULL,
-  `id_category` int(11) NOT NULL
+  `featured` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Eliminarea datelor din tabel `article_image`
+--
+
+INSERT INTO `article_image` (`id`, `id_article`, `id_image`, `featured`) VALUES
+(1, 1, 3, 1),
+(2, 1, 5, 0),
+(3, 1, 4, 0),
+(4, 1, 2, 0),
+(5, 2, 6, 0);
 
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `event_category`
+-- Structură tabel pentru tabel `category`
 --
 
-CREATE TABLE `event_category` (
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `slug` varchar(20) NOT NULL,
-  `name` varchar(20) NOT NULL
+  `id_parent` int(11) NOT NULL DEFAULT '0',
+  `slug` varchar(55) NOT NULL,
+  `name` varchar(55) NOT NULL,
+  `name_plural` varchar(55) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Salvarea datelor din tabel `event_category`
+-- Eliminarea datelor din tabel `category`
 --
 
-INSERT INTO `event_category` (`id`, `slug`, `name`) VALUES
-(1, 'film', 'Film'),
-(2, 'teatru', 'Teatru'),
-(3, 'opera', 'Opera'),
-(4, 'festival', 'Festival'),
-(5, 'concert', 'Concert');
+INSERT INTO `category` (`id`, `id_parent`, `slug`, `name`, `name_plural`) VALUES
+(1, 0, 'produs', 'Produs', 'Produse'),
+(2, 0, 'eveniment', 'Eveniment', 'Evenimente'),
+(26, 1, 'aliment', 'Aliment', 'Alimente'),
+(29, 2, 'film', 'Film', 'Filme'),
+(30, 1, 'menaj', 'Menaj', 'Articole de Menaj'),
+(31, 1, 'medicament', 'Medicament', 'Medicamente'),
+(32, 2, 'concert', 'Concert', 'Concerte'),
+(33, 2, 'opera', 'Opera', NULL),
+(34, 2, 'teatru', 'Teatru', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `image`
+-- Structură tabel pentru tabel `favorite_store`
+--
+
+CREATE TABLE `favorite_store` (
+  `id` int(11) NOT NULL,
+  `id_store` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `image`
 --
 
 CREATE TABLE `image` (
@@ -87,159 +147,72 @@ CREATE TABLE `image` (
   `name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Eliminarea datelor din tabel `image`
+--
+
+INSERT INTO `image` (`id`, `name`) VALUES
+(1, 'blank.png'),
+(2, 'baked-bakery-blur-209403.jpg'),
+(3, 'baked-baker-ball-shaped-745988.jpg'),
+(4, 'bake-baking-bread-209291.jpg'),
+(5, 'baguette-bakery-bread-5802.jpg'),
+(6, 'band-concert-dark-1699161.jpg');
+
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `order`
+-- Structură tabel pentru tabel `order`
 --
 
 CREATE TABLE `order` (
   `id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_user` int(11) NOT NULL,
+  `id_address` int(11) NOT NULL,
   `details` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `order_event`
+-- Structură tabel pentru tabel `order_article`
 --
 
-CREATE TABLE `order_event` (
+CREATE TABLE `order_article` (
   `id` int(11) NOT NULL,
-  `id_event` int(11) NOT NULL,
-  `id_order` int(11) NOT NULL
+  `id_order` int(11) NOT NULL,
+  `id_article` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `order_product`
---
-
-CREATE TABLE `order_product` (
-  `id` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `id_order` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `product`
---
-
-CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `price` float NOT NULL,
-  `description` longtext NOT NULL,
-  `id_image` int(11) DEFAULT NULL,
-  `id_store` int(11) NOT NULL,
-  `id_category` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `product_category`
---
-
-CREATE TABLE `product_category` (
-  `id` int(11) NOT NULL,
-  `slug` varchar(20) NOT NULL,
-  `name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Salvarea datelor din tabel `product_category`
---
-
-INSERT INTO `product_category` (`id`, `slug`, `name`) VALUES
-(1, 'aliment', 'Alimente'),
-(2, 'menaj', 'Articole de Menaj'),
-(3, 'medicament', 'Medicamente');
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `product_image`
---
-
-CREATE TABLE `product_image` (
-  `id` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `id_image` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `promotion`
---
-
-CREATE TABLE `promotion` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `date_start` datetime NOT NULL,
-  `date_end` datetime NOT NULL,
-  `id_type` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `promotion_product`
---
-
-CREATE TABLE `promotion_product` (
-  `id` int(11) NOT NULL,
-  `id_promotion` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `new_price` float DEFAULT NULL,
-  `percent_off` int(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `promotion_type`
---
-
-CREATE TABLE `promotion_type` (
-  `id` varchar(15) NOT NULL,
-  `name` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Salvarea datelor din tabel `promotion_type`
---
-
-INSERT INTO `promotion_type` (`id`, `name`) VALUES
-('fixed_price', 'Pret Fix'),
-('percent_off', 'Procentaj Off');
-
--- --------------------------------------------------------
-
---
--- Structura de tabel pentru tabelul `store`
+-- Structură tabel pentru tabel `store`
 --
 
 CREATE TABLE `store` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `id_image` int(11) NOT NULL
+  `name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Eliminarea datelor din tabel `store`
+--
+
+INSERT INTO `store` (`id`, `name`) VALUES
+(1, 'lidl'),
+(2, 'kaufland'),
+(5, 'catena'),
+(6, 'bla');
 
 -- --------------------------------------------------------
 
 --
--- Structura de tabel pentru tabelul `users`
+-- Structură tabel pentru tabel `user`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `first_name` text NOT NULL,
   `last_name` text NOT NULL,
@@ -251,220 +224,194 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Salvarea datelor din tabel `users`
+-- Eliminarea datelor din tabel `user`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `register_date`, `rights`, `phone`) VALUES
-(1, 'Alin', 'Cirja', 'alin@alin.ro', '$2y$10$GSZW5Y8g3iuGRIZpRfnwZOKTAFAmkpU8S5/cs2sAI533YVpnX738C', '2019-03-29 16:36:14', '', '');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `register_date`, `rights`, `phone`) VALUES
+(1, 'Alin', 'Cirja', 'alin@alin.ro', '$2y$10$H.gzfhUjlJ3lsyhZeXmjze.4Z05TNldT4bz3.ljYyLmyDUcIzNuC6', '2019-03-29 16:36:14', '', '');
 
 --
--- Indexes for dumped tables
+-- Indexuri pentru tabele eliminate
 --
 
 --
--- Indexes for table `address`
+-- Indexuri pentru tabele `address`
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `USER` (`id_user`) USING BTREE;
+  ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `event`
+-- Indexuri pentru tabele `article`
 --
-ALTER TABLE `event`
+ALTER TABLE `article`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `CATEGORY` (`id_category`) USING BTREE,
-  ADD KEY `IMAGE` (`id_image`) USING BTREE;
+  ADD KEY `id_category` (`id_category`);
 
 --
--- Indexes for table `event_category`
+-- Indexuri pentru tabele `article_image`
 --
-ALTER TABLE `event_category`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `article_image`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_article` (`id_article`),
+  ADD KEY `id_image` (`id_image`);
 
 --
--- Indexes for table `image`
+-- Indexuri pentru tabele `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indexuri pentru tabele `favorite_store`
+--
+ALTER TABLE `favorite_store`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_store` (`id_store`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexuri pentru tabele `image`
 --
 ALTER TABLE `image`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order`
+-- Indexuri pentru tabele `order`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `USER` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_address` (`id_address`);
 
 --
--- Indexes for table `order_event`
+-- Indexuri pentru tabele `order_article`
 --
-ALTER TABLE `order_event`
+ALTER TABLE `order_article`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `EVENT` (`id_event`) USING BTREE,
-  ADD KEY `ORDER` (`id_order`);
+  ADD KEY `id_order` (`id_order`),
+  ADD KEY `id_article` (`id_article`);
 
 --
--- Indexes for table `order_product`
---
-ALTER TABLE `order_product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `PRODUCT` (`id_product`),
-  ADD KEY `ORDER` (`id_order`) USING BTREE;
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `STORE` (`id_store`),
-  ADD KEY `IMAGE` (`id_image`),
-  ADD KEY `CATEGORY` (`id_category`) USING BTREE;
-
---
--- Indexes for table `product_category`
---
-ALTER TABLE `product_category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product_image`
---
-ALTER TABLE `product_image`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `PRODUCT` (`id_product`),
-  ADD KEY `IMAGE` (`id_image`);
-
---
--- Indexes for table `promotion`
---
-ALTER TABLE `promotion`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `TYPE` (`id_type`);
-
---
--- Indexes for table `promotion_product`
---
-ALTER TABLE `promotion_product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `PROMOTION` (`id_promotion`),
-  ADD KEY `PRODUCT` (`id_product`);
-
---
--- Indexes for table `promotion_type`
---
-ALTER TABLE `promotion_type`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `store`
+-- Indexuri pentru tabele `store`
 --
 ALTER TABLE `store`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IMAGE` (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexuri pentru tabele `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pentru tabele eliminate
 --
 
 --
--- AUTO_INCREMENT for table `address`
+-- AUTO_INCREMENT pentru tabele `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `event`
+-- AUTO_INCREMENT pentru tabele `article`
 --
-ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `event_category`
+-- AUTO_INCREMENT pentru tabele `article_image`
 --
-ALTER TABLE `event_category`
+ALTER TABLE `article_image`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `image`
+-- AUTO_INCREMENT pentru tabele `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT pentru tabele `favorite_store`
+--
+ALTER TABLE `favorite_store`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pentru tabele `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `order`
+-- AUTO_INCREMENT pentru tabele `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order_event`
---
-ALTER TABLE `order_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order_product`
---
-ALTER TABLE `order_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `product_category`
---
-ALTER TABLE `product_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `product_image`
---
-ALTER TABLE `product_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `promotion`
---
-ALTER TABLE `promotion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `promotion_product`
---
-ALTER TABLE `promotion_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `store`
---
-ALTER TABLE `store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Restrictii pentru tabele sterse
+-- AUTO_INCREMENT pentru tabele `order_article`
+--
+ALTER TABLE `order_article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pentru tabele `store`
+--
+ALTER TABLE `store`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pentru tabele `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constrângeri pentru tabele eliminate
 --
 
 --
--- Restrictii pentru tabele `event`
+-- Constrângeri pentru tabele `address`
 --
-ALTER TABLE `event`
-  ADD CONSTRAINT `event_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `event_category` (`id`);
+ALTER TABLE `address`
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constrângeri pentru tabele `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constrângeri pentru tabele `article_image`
+--
+ALTER TABLE `article_image`
+  ADD CONSTRAINT `article_image_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `article_image_ibfk_2` FOREIGN KEY (`id_image`) REFERENCES `image` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constrângeri pentru tabele `favorite_store`
+--
+ALTER TABLE `favorite_store`
+  ADD CONSTRAINT `favorite_store_ibfk_1` FOREIGN KEY (`id_store`) REFERENCES `store` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `favorite_store_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constrângeri pentru tabele `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constrângeri pentru tabele `order_article`
+--
+ALTER TABLE `order_article`
+  ADD CONSTRAINT `order_article_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `order_article_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

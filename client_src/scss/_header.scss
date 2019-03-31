@@ -106,3 +106,67 @@
         }
     }
 }
+
+.minicart {
+    position: relative;
+
+    .minicart-container {
+        background-color: $white;
+        position: absolute;
+        right: 0;
+        width: 300px;
+        display: none;
+        box-shadow: 0 2px 4px rgba($black, .1);
+    }
+
+    &:hover {
+        .minicart-container {
+            display: block;
+        }
+    }
+
+    h6 {
+        color: $primary;
+        font-size: 9px;
+        font-weight: 400;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 10px 5px 5px;
+        text-align: center;
+    }
+
+    .minicart-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        max-height: 150px;
+        overflow-y: auto;
+
+        & > li {
+            border-top: 1px solid rgba($black, .1);
+            border-bottom: 1px solid rgba($black, .1);
+            padding: 10px;
+
+            & + li {
+                border-top: none;
+            }
+        }
+
+        .name {
+            line-height: 1;
+            
+            small {
+                display: block;
+                font-size: 10px;
+                color: $primary;
+                margin-top: 2px;
+            }
+        }
+
+        .price {
+            font-size: 10px;
+            text-align: right;
+        }
+    }
+}
