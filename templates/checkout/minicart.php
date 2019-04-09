@@ -1,8 +1,9 @@
 <h6>Cosul Meu</h6>
 <ul class="minicart-list">
 <?php
-include_once "classes/Database.php";
+include_once "classes/Article.php";
 $action = new Database();
+$articleObj = new Article();
 
 $occur = array_count_values($_SESSION["cart_articles"]);
 foreach ($occur as $id => $count) {
@@ -10,7 +11,11 @@ foreach ($occur as $id => $count) {
     $category = $action->getForeignData("category", $article["id_category"]);
 ?>
     <li class="minicart-item" id="<?php echo $id; ?>">
-        <div class="row no-gutters flex-nowrap">
+        <div class="row no-gutters flex-nowrap align-items-center">
+            <div class="col">
+                <?php $image = $articleObj->getDefaultImage($id); ?>
+                <div class="image" style="background-image: url('<?php echo PATH_IMG . $image["name"]; ?>');"></div>
+            </div>
             <div class="col">
                 <div class="name">
                     <?php echo $article["name"]; ?>
@@ -23,25 +28,15 @@ foreach ($occur as $id => $count) {
                 </div>
             </div>
             <div class="col">
-                <div class="price-action">
-                <?php
-                    $price_min_float = number_format((float)$article["price_min"], 2, '.', '');
-                    $price_min_string = strval($price_min_float);
-                    $price_min_array = explode(".", $price_min_string);
-
-                    $price_max_float = number_format((float)$article["price_max"], 2, '.', '');
-                    $price_max_string = strval($price_max_float);
-                    $price_max_array = explode(".", $price_max_string);
-                ?>
+                <div class="price">
                     <div class="price">
-                        <span class="min"><?php echo $price_min_array[0]; ?><sup><?php echo $price_min_array[1]; ?></sup><small><?php echo CURRENCY; ?></small></span>
-                        -
-                        <span class="max"><?php echo $price_max_array[0]; ?><sup><?php echo $price_max_array[1]; ?></sup><small><?php echo CURRENCY; ?></small></span>
+                        <?php echo getVisualPrice($article["price"]); ?>
                     </div>
-                    <div class="action text-right">
-                        <a href="<?php echo ROOT_URL; ?>scripts/checkout/removefromcart" data-id="<?php echo $id; ?>"
-                        class="btn btn-sm btn-outline-primary removefromcart"><i class="fas fa-times"></i></a>
-                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="action text-right">
+                    <a href="<?php echo ROOT_URL; ?>scripts/checkout/removefromcart" data-id="<?php echo $id; ?>" class="btn btn-sm btn-outline-danger removefromcart"><i class="fas fa-times"></i></a>
                 </div>
             </div>
         </div>

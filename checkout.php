@@ -1,5 +1,5 @@
 <?php
-    $checkoutPage = isset($_GET["page"]) && ($_GET["page"] === "checkout") ? $_GET["page"] : "cart";
+    $checkoutPage = isset($_GET["page"]) && ($_GET["page"] === "success") ? $_GET["page"] : "cart";
 
     include_once "templates/global/head.php";
 
@@ -13,8 +13,8 @@
     include_once "templates/global/header.php";
 
     switch ($checkoutPage) {
-        case "checkout":
-            setPageHeading("Finalizare Comanda");
+        case "success":
+            setPageHeading("Success");
             break;
 
         default:

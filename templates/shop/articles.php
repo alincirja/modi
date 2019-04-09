@@ -1,7 +1,9 @@
 <?php
     include_once "classes/Category.php";
+    include_once "classes/Article.php";
     $action = new Category();
     $articles = $action->getData("article");
+    $articleObj = new Article();
 
     $category_slug = isset($_GET["category"]) ? $_GET["category"] : "";
     $category_id = "";
@@ -28,43 +30,15 @@
         <?php foreach ($articles  as $article) { ?>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
                 <article id="article-<?php echo $article["id"]; ?>" class="article">
-                    <?php
-                        $images = $action->getCustomData("SELECT * FROM article_image WHERE id_article='" . $article["id"] . "'");
-                        $featured = false;
-                        if (count($images)) {
-                            for ($i = 0; $i < count($images); $i++) {
-                                if ($images[$i]["featured"]) {
-                                    $featured = $images[$i]["id_image"];
-                                } else {
-                                    $featured = $images[0]["id_image"];
-                                }
-                            }
-                        }
-                        if ($featured) {
-                            $image = $action->getDataById("image", $featured);
-                    ?>
-                        <div class="featured-image">
-                            <div class="embed-responsive embed-responsive-1by1">
-                                <img src="<?php echo ROOT_PATH; ?>static/img/<?php echo $image["name"]; ?>" alt="" class="embed-responsive-item">
-                            </div>
+                    <?php $image = $articleObj->getDefaultImage($article["id"]); ?>
+                    <div class="featured-image">
+                        <div class="embed-responsive embed-responsive-1by1">
+                            <img src="<?php echo PATH_IMG . $image["name"]; ?>" alt="" class="embed-responsive-item">
                         </div>
-                    <?php
-                        }
-                    ?>
+                    </div>
                     <h6><?php echo $article["name"]; ?></h6>
-                    <?php
-                        $price_min_float = number_format((float)$article["price_min"], 2, '.', '');
-                        $price_min_string = strval($price_min_float);
-                        $price_min_array = explode(".", $price_min_string);
-
-                        $price_max_float = number_format((float)$article["price_max"], 2, '.', '');
-                        $price_max_string = strval($price_max_float);
-                        $price_max_array = explode(".", $price_max_string);
-                    ?>
                     <div class="price">
-                        <span class="min"><?php echo $price_min_array[0]; ?><sup><?php echo $price_min_array[1]; ?></sup><small><?php echo CURRENCY; ?></small></span>
-                        -
-                        <span class="max"><?php echo $price_max_array[0]; ?><sup><?php echo $price_max_array[1]; ?></sup><small><?php echo CURRENCY; ?></small></span>
+                        <?php echo getVisualPrice($article["price"]); ?>
                     </div>
                     <div class="add-to-cart">
                             <a href="<?php echo ROOT_URL; ?>scripts/checkout/addtocart" data-id="<?php echo $article["id"]; ?>"

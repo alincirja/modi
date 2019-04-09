@@ -41,3 +41,34 @@ $(document).on("click", ".removefromcart", e => {
         }
     });
 });
+
+/**
+ * PLACE ORDER
+ */
+$(document).on("click", "#placeOrder", e => {
+    e.preventDefault();
+    const $this = $(e.currentTarget);
+    const data = {
+        action: "placeOrder",
+        id_address: $(document).find("[name=selectedAddress]:checked").val(),
+        order_details: $(document).find("[name=orderMessage]").val()
+    }
+    $.ajax({
+        url: "scripts/checkout/order.php",
+        method: "POST",
+        data: data,
+        success: response => {
+            //console.log(response);
+            const dataJSON = JSON.parse(response);
+            if (dataJSON.type === "success") {
+                $.ajax({
+                    url: "scripts/checkout/dropcart.php"
+                });
+                location.replace($this.attr("href") + "?page=success");
+            }
+        },
+        error: err => {
+            console.log(err);
+        }
+    });
+});

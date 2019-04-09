@@ -35,27 +35,7 @@
                         <nav id="nav" class="site-nav">
                             <ul class="nav">
                                 <li><a href="<?php echo ROOT_URL; ?>">Acasa</a></li>
-                                <li class="dropdown"><a href="<?php echo ROOT_URL; ?>shop">Modi Shop <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="nav-submenu">
-                                        <li><a href="#">Cumparaturi</a>
-                                            <ul class="nav--submenu">
-                                                <li><a href="#">Alimente</a></li>
-                                                <li><a href="#">Medicamente</a></li>
-                                                <li><a href="#">Menaj</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Evenimente</a>
-                                            <ul class="nav--submenu">
-                                                <li><a href="#">Film</a></li>
-                                                <li><a href="#">Teatru</a></li>
-                                                <li><a href="#">Opera</a></li>
-                                                <li><a href="#">Concert</a></li>
-                                                <li><a href="#">Festival</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Promotii</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="<?php echo ROOT_URL; ?>shop">Modi Shop</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>about">Despre</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>faq">Q&A</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>feedback">Feedback</a></li>

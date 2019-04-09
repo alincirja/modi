@@ -31,6 +31,14 @@ function isAdmin() {
     }
 }
 
+// visual price
+function getVisualPrice($price) {
+    $price_float = number_format((float)$price, 2, ".", "");
+    $price_string = strval($price_float);
+    $price_array = explode(".", $price_string);
+    return '<span class="price">' . $price_array[0] . '<sup>' . $price_array[1] . '</sup><small>' . CURRENCY . '</small></span>';
+}
+
 // check for home page
 function isHome() {
     return basename($_SERVER['PHP_SELF']) === "index.php" ? true : false;
