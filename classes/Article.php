@@ -24,4 +24,14 @@ class Article extends Database {
         }
         return $image;
     }
+
+    public function getImages($id) {
+        $articleImages =  $this->getCustomData("SELECT * FROM " . $this->table_article_image . " WHERE id_article='" . $id . "'");
+        $articleImagesIds = "";
+        foreach ($articleImages as $key=>$image) {
+            $articleImagesIds .= $image["id_image"];
+            $articleImagesIds .= $key < count($articleImages) - 1 ? ", " : "";
+        }
+        return $images = $this->getCustomData("SELECT * FROM " . $this->table_image . " WHERE id IN (" . $articleImagesIds . ")");
+    }
 }

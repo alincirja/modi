@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: mart. 31, 2019 la 06:44 PM
+-- Timp de generare: apr. 10, 2019 la 10:39 PM
 -- Versiune server: 10.1.32-MariaDB
 -- Versiune PHP: 7.2.5
 
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `address` (
   `id` int(11) NOT NULL,
-  `address_name` varchar(55) NOT NULL,
+  `name` varchar(55) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `address` text NOT NULL,
   `city` varchar(55) NOT NULL,
   `county` varchar(25) NOT NULL,
-  `postal_code` varchar(6) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -42,9 +42,9 @@ CREATE TABLE `address` (
 -- Eliminarea datelor din tabel `address`
 --
 
-INSERT INTO `address` (`id`, `address_name`, `address`, `city`, `county`, `postal_code`, `id_user`) VALUES
-(1, 'Brasov', 'strada universitatii, brasov', 'brasov', 'Romania', '234567', 1),
-(2, 'Brasov', 'strada universitatii, brasov', 'brasov', 'Romania', '234575', 1);
+INSERT INTO `address` (`id`, `name`, `phone`, `address`, `city`, `county`, `id_user`) VALUES
+(4, 'Alin', '0749621399', 'Str. Fara Nume, nr. 11', 'Fagaras', 'Brasov', 1),
+(5, 'Marius', '0747382488', 'Str. Fara Nume, nr. 11', 'Sacele', 'Brasov', 1);
 
 -- --------------------------------------------------------
 
@@ -59,17 +59,16 @@ CREATE TABLE `article` (
   `description` longtext,
   `date_start` datetime DEFAULT NULL,
   `date_end` datetime DEFAULT NULL,
-  `price_min` double NOT NULL,
-  `price_max` double NOT NULL
+  `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `article`
 --
 
-INSERT INTO `article` (`id`, `name`, `id_category`, `description`, `date_start`, `date_end`, `price_min`, `price_max`) VALUES
-(1, 'Paine', 26, NULL, NULL, NULL, 1.2, 12),
-(2, 'Antonia', 32, NULL, '2019-04-30 20:00:00', NULL, 25, 100);
+INSERT INTO `article` (`id`, `name`, `id_category`, `description`, `date_start`, `date_end`, `price`) VALUES
+(1, 'Paine', 26, NULL, NULL, NULL, 1.2),
+(2, 'Antonia', 32, 'Locatie: Sala Polivalenta<br>Pentru bilete VIP, sunati la: 0847394547', '2019-04-30 20:00:00', '2019-04-30 23:00:00', 25);
 
 -- --------------------------------------------------------
 
@@ -162,28 +161,50 @@ INSERT INTO `image` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `order`
---
-
-CREATE TABLE `order` (
-  `id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `id_user` int(11) NOT NULL,
-  `id_address` int(11) NOT NULL,
-  `details` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structură tabel pentru tabel `order_article`
 --
 
 CREATE TABLE `order_article` (
   `id` int(11) NOT NULL,
   `id_order` int(11) NOT NULL,
-  `id_article` int(11) NOT NULL
+  `id_article` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Eliminarea datelor din tabel `order_article`
+--
+
+INSERT INTO `order_article` (`id`, `id_order`, `id_article`, `quantity`) VALUES
+(3, 9, 1, 3),
+(4, 9, 2, 1),
+(5, 10, 1, 1),
+(6, 14, 2, 1),
+(7, 15, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `order_list`
+--
+
+CREATE TABLE `order_list` (
+  `id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL,
+  `id_address` int(11) NOT NULL,
+  `details` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Eliminarea datelor din tabel `order_list`
+--
+
+INSERT INTO `order_list` (`id`, `date`, `id_user`, `id_address`, `details`) VALUES
+(9, '2019-04-09 20:28:24', 1, 5, 'Some teste'),
+(10, '2019-04-09 20:30:37', 1, 4, ''),
+(14, '2019-04-09 20:33:29', 1, 4, ''),
+(15, '2019-04-10 17:52:06', 1, 5, 'test');
 
 -- --------------------------------------------------------
 
@@ -278,20 +299,20 @@ ALTER TABLE `image`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_address` (`id_address`);
-
---
 -- Indexuri pentru tabele `order_article`
 --
 ALTER TABLE `order_article`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_order` (`id_order`),
   ADD KEY `id_article` (`id_article`);
+
+--
+-- Indexuri pentru tabele `order_list`
+--
+ALTER TABLE `order_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_address` (`id_address`);
 
 --
 -- Indexuri pentru tabele `store`
@@ -313,7 +334,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pentru tabele `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pentru tabele `article`
@@ -346,16 +367,16 @@ ALTER TABLE `image`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pentru tabele `order`
---
-ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT pentru tabele `order_article`
 --
 ALTER TABLE `order_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pentru tabele `order_list`
+--
+ALTER TABLE `order_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pentru tabele `store`
@@ -400,18 +421,18 @@ ALTER TABLE `favorite_store`
   ADD CONSTRAINT `favorite_store_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constrângeri pentru tabele `order`
---
-ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constrângeri pentru tabele `order_article`
 --
 ALTER TABLE `order_article`
   ADD CONSTRAINT `order_article_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order_article_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `order_article_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `order_list` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constrângeri pentru tabele `order_list`
+--
+ALTER TABLE `order_list`
+  ADD CONSTRAINT `order_list_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `order_list_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

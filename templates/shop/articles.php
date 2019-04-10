@@ -33,15 +33,15 @@
                     <?php $image = $articleObj->getDefaultImage($article["id"]); ?>
                     <div class="featured-image">
                         <div class="embed-responsive embed-responsive-1by1">
-                            <img src="<?php echo PATH_IMG . $image["name"]; ?>" alt="" class="embed-responsive-item">
+                            <a href="<?php echo ROOT_URL . "article?id=" . $article["id"]; ?>"><img src="<?php echo PATH_IMG . $image["name"]; ?>" alt="" class="embed-responsive-item"></a>
                         </div>
                     </div>
-                    <h6><?php echo $article["name"]; ?></h6>
+                    <h6><a href="<?php echo ROOT_URL . "article?id=" . $article["id"]; ?>"><?php echo $article["name"]; ?></a></h6>
                     <div class="price">
                         <?php echo getVisualPrice($article["price"]); ?>
                     </div>
                     <div class="add-to-cart">
-                            <a href="<?php echo ROOT_URL; ?>scripts/checkout/addtocart" data-id="<?php echo $article["id"]; ?>"
+                        <a href="<?php echo ROOT_URL; ?>scripts/checkout/addtocart" data-id="<?php echo $article["id"]; ?>"
                             class="btn btn-primary addtocart"><i class="fas fa-fw fa-cart-plus"></i> Adauga in cos</a>
                     </div>
                 </article>

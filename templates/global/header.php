@@ -22,7 +22,9 @@
                         <div class="minicart">
                             <div class="icon">
                                 <span><i class="fas fa-shopping-basket"></i></span>
-                                <small class="badge badge-danger"><?php echo isset($_SESSION["cart_articles"]) ? count($_SESSION["cart_articles"]) : 0; ?></small>
+                                <?php if (isset($_SESSION["cart_articles"]) && count($_SESSION["cart_articles"]) > 0) { ?>
+                                <small class="badge badge-danger"><?php echo count($_SESSION["cart_articles"]); ?></small>
+                                <?php } ?>
                             </div>
                             <div class="minicart-container" id="minicartContainer">
                             <?php if (isset($_SESSION["cart_articles"]) && count($_SESSION["cart_articles"])) {

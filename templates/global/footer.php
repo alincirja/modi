@@ -9,19 +9,22 @@
                         <div class="col-12 col-md-6 col-lg-3">
                             <h6>Quick links</h6>
                             <ul class="list-unstyled">
-                                <li><a href="#">Despre Noi</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Feedback</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>about">Despre Noi</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>faq">FAQ</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>feedback">Feedback</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>contact">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <h6>My Account</h6>
                             <ul class="list-unstyled">
-                                <li><a href="#">Dashboard</a></li>
-                                <li><a href="#">Login</a></li>
-                                <li><a href="#">Inregistrare</a></li>
-                                <li><a href="#">Resetare Parola</a></li>
+                                <?php if (loggedIn()) { ?>
+                                <li><a href="<?php echo ROOT_URL; ?>account">Dashboard</a></li>
+                                <li><a href="<?php echo LOGOUT; ?>">Logout</a></li>
+                                <?php } else { ?>
+                                <li><a href="<?php echo ROOT_URL; ?>authentification">Login</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>authentification?auth=register">Inregistrare</a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <div class="col-12 col-md-6 col-lg-2">
