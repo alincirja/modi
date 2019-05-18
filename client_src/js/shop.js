@@ -51,14 +51,15 @@ $(document).on("click", "#placeOrder", e => {
     const data = {
         action: "placeOrder",
         id_address: $(document).find("[name=selectedAddress]:checked").val(),
-        order_details: $(document).find("[name=orderMessage]").val()
+        order_details: $(document).find("[name=orderMessage]").val(),
+        total_price: $(document).find("[name=totalPrice]").val()
     }
     $.ajax({
         url: "scripts/checkout/order.php",
         method: "POST",
         data: data,
         success: response => {
-            //console.log(response);
+            console.log(response);
             const dataJSON = JSON.parse(response);
             if (dataJSON.type === "success") {
                 $.ajax({

@@ -15,7 +15,7 @@
                 <a href="#" class="btn btn-block btn-primary">Despre Noi</a>
             </div>
             <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">
-                <a href="<?php echo ROOT_URL; ?>authentification" class="btn btn-block btn-outline-primary">Autentificare</a>
+                <a href="<?php echo ROOT_URL; ?>auth" class="btn btn-block btn-outline-primary">Autentificare</a>
             </div>
         </div>
     </div><!--/.container-->

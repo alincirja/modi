@@ -37,9 +37,6 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Salveaza</button>
-        <?php if (isset($_GET["page"]) && $_GET["page"] === "cart") { ?>
-            <input type="hidden" name="inCart" id="inCart" value="true">
-            <button class="btn btn-outline-primary" id="hideNewAddress">Anulare</button>
-        <?php } ?>
+        <button class="btn btn-outline-primary" id="hideNewAddress">Anulare</button>
     </form>
 </div>

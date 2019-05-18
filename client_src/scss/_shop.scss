@@ -130,3 +130,21 @@
         }
     }
 }
+
+.product-list {
+    .product {
+        & + .product {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba($black, .1);
+        }
+    }
+
+    .image {
+        width: 75px;
+        height: 100px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+}

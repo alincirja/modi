@@ -1,0 +1,128 @@
+.admin-nav {
+    background-color: $primary;
+
+    .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: inline-block;
+
+            a {
+                display: block;
+                color: $white;
+                text-transform: uppercase;
+                font-size: 12px;
+                padding: 10px 15px;
+                font-weight: 700;
+
+                &:hover {
+                    background-color: rgba($white, .1);
+                }
+
+                &.active {
+                    background-color: $white;
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
+
+.image-listing {
+    .image {
+        padding: 150px 0 0;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+        &-actions {
+            background-color: rgba($white, .75);
+            padding: 10px;
+        }
+    }
+}
+
+.main-admin {
+    .order-list {
+        .order {
+            & + .order {
+                padding-top: 10px;
+                margin-top: 15px;
+                border-top: 1px solid rgba($black, .1);
+            }
+
+            &-details {
+                background-color: rgba($primary, .1);
+                margin: 5px 0 -15px;
+                padding: 15px;
+                display: none;
+            }
+
+            &.opened {
+                & .order-details {
+                    display: block;
+                }
+            }
+        }
+
+        .status-update {
+            .order-val {
+                display: flex;
+                align-items: center;
+                background-color: rgba($primary, .1);
+                padding: 0 0 0 5px;
+
+                input {
+                    border: none;
+                    font-size: 12px;
+                    padding-left: 5px;
+                    color: $primary;
+                    outline: none;
+                }
+
+                button {
+                    border: none;
+                    background-color: $primary;
+                    color: $white;
+                }
+            }
+        }
+
+        .articles {
+            .image {
+                width: 55px;
+                height: 75px;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+        }
+    }
+
+    .gallery-setup {
+        .images-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 -5px;
+            display: flex;
+
+            li {
+                padding: 5px;
+                width: 25%;
+
+                & > div {
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .overlay {
+                    background-color: rgba($white, .75);
+                    text-align: center;
+                    padding: 5px;
+                }
+            }
+        }
+    }
+}

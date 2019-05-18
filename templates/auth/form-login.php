@@ -16,7 +16,7 @@
                             <button type="submit" class="btn btn-block btn-primary">Autentificare</button>
                         </div>
                         <div class="col-6">
-                            <a href="<?php echo ROOT_URL; ?>authentification?auth=register" class="btn btn-block btn-outline-primary">Inregistrare</a>
+                            <a href="<?php echo ROOT_URL; ?>auth?auth=register" class="btn btn-block btn-outline-primary">Inregistrare</a>
                         </div>
                     </div>
                 </form>

@@ -4,7 +4,7 @@
     include_once "templates/global/head.php";
 
     if (!loggedIn()) {
-        header("Location: authentification");
+        header("Location: auth");
         exit();
     }
 
@@ -23,7 +23,7 @@
     }
 ?>
 
-<section id="main" class="main-content main-content-authentification">
+<section id="main" class="main-content main-content-checkout">
     <div class="container">
         <?php include_once "templates/checkout/" . $checkoutPage . ".php"; ?>
     </div>

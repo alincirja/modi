@@ -27,9 +27,9 @@
     }
 ?>
 
-<section id="main" class="main-content main-content-authentification">
+<section id="main" class="main-content main-content-auth">
     <div class="container">
-        <?php include_once "templates/authentification/form-" . $authPage . ".php"; ?>
+        <?php include_once "templates/auth/form-" . $authPage . ".php"; ?>
     </div>
 </section>
 

@@ -55,24 +55,24 @@
                     <div class="category"><?php echo $category["name"]; ?></div>
 
                     <div class="dates">
-                        <?php if ($article["date_start"]) { ?>
+                        <?php if (strlen($article["date_start"]) > 9) { ?>
                             <div>
                                 <label>De la:</label>
                                 <span>
                                 <?php
-                                    $dateStart = new DateTime($article["date_start"], new DateTimeZone('Europe/Bucharest'));
-                                    echo $dateStart->format("D, d M Y | G:i:s T");
+                                    $dateStart = new DateTime($article["date_start"]);
+                                    echo $dateStart->format("D, d M Y | G:i");
                                 ?>
                                 </span>
                             </div>
                         <?php }
-                            if ($article["date_start"]) { ?>
+                            if (strlen($article["date_end"]) > 9) { ?>
                             <div>
                                 <label>Pana la:</label>
                                 <span>
                                 <?php
-                                    $dateEnd = new DateTime($article["date_end"], new DateTimeZone('Europe/Bucharest'));
-                                    echo $dateEnd->format("D, d M Y | G:i:s T");
+                                    $dateEnd = new DateTime($article["date_end"]);
+                                    echo $dateEnd->format("D, d M Y | G:i");
                                 ?>
                                 </span>
                             </div>

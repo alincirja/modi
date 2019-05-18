@@ -49,6 +49,7 @@ foreach ($occur as $id => $count) {
 </ul>
 <div class="total-cart text-right">
     <h5><span class="label">Total:</span> <strong class="value"><?php echo getVisualPrice($cartObj->getCartTotal()); ?></strong></h5>
+    <input type="hidden" name="totalPrice" value="<?php echo $cartObj->getCartTotal(); ?>">
 </div>
 <div class="row align-items-end mt-4">
     <div class="col">

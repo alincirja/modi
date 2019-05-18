@@ -101,11 +101,11 @@ class User extends Database {
      * UPDATE USER DETAILS
      */
     public function updateInfo($info) {
-        if (empty($info["name"]) || empty($info["email"])) {
+        if (empty($info["fname"]) || empty($info["email"])) {
             $this->sendUserMsg("danger", "Completati campurile oblligatorii");
             exit();
         } else {
-            if (!preg_match("/^[a-zA-Z\s]*$/", $info["name"])) {
+            if (!preg_match("/^[a-zA-Z\s]*$/", $info["fname"]) || !preg_match("/^[a-zA-Z\s]*$/", $info["lname"])) {
                 $this->sendUserMsg("danger", "Folositi doar litere latine in campul nume");
                 exit();
             } else {
@@ -115,13 +115,10 @@ class User extends Database {
                     exit();
                 } else {
                     $sql = "UPDATE " . $this->table . 
-                    " SET name='" . $info["name"] . 
+                    " SET first_name='" . $info["fname"] . 
+                    "', last_name='" . $info["lname"] . 
                     "', email='" . $info["email"] . 
-                    "', description='" . $info["description"] . 
-                    "', social_facebook='" . $info["facebook"] . 
-                    "', social_instagram='" . $info["instagram"] . 
-                    "', social_linkedin='" . $info["linkedin"] . 
-                    "', social_youtube='" . $info["youtube"] . 
+                    "', phone='" . $info["phone"] . 
                     "' WHERE id=" . $info["id"];
                     $result = mysqli_query($this->connect, $sql);
                     if ($result) {
@@ -139,48 +136,37 @@ class User extends Database {
     /**
      * UPDATE USER PASSWORD
      */
-    public function checkPassword($password, $id) {
-        if (empty($password)) {
-            $this->sendUserMsg("danger", "Completati parola curenta");
-            exit();
-        } else {
-            $sql = "SELECT password FROM " . $this->table . " WHERE id='" . $id . "'";
-            $result = mysqli_query($this->connect, $sql);
-            if ($row = mysqli_fetch_assoc($result)) {
-                $hashedPassCheck = password_verify($password, $row["password"]);
-                if ($hashedPassCheck == true) {
-                    $this->sendUserMsg("success", "Parola este corecta");
-                    exit();
-                } else {
-                    $this->sendUserMsg("danger", "Parola este incorecta");
-                    exit();
-                }
-            } 
-        }
-
-    }
-
-    public function updatePassword($password, $confirm, $id) {
-        if (empty($password) || empty($confirm)) {
+    public function updatePassword($currentPassword, $password, $confirm, $id) {
+        if (empty($currentPassword) || empty($password) || empty($confirm)) {
             $this->sendUserMsg("danger", "Campurile sunt obligatorii");
             exit();
         } else {
             if ($password != $confirm) {
                 $this->sendUserMsg("danger", "Parolele nu coincid");
             } else {
-                $newPassword = password_hash($password, PASSWORD_DEFAULT);
-                $sql = "UPDATE " . $this->table .
-                " SET password='" . $newPassword . "' WHERE id='" . $id . "'";
+                $sql = "SELECT password FROM " . $this->table . " WHERE id='" . $id . "'";
                 $result = mysqli_query($this->connect, $sql);
-                if ($result) {
-                    $this->sendUserMsg("success", "Parola a fost schimbata cu succes");
-                    exit();
-                } else {
-                    $this->sendUserMsg("danger", "Eroare BD " . mysqli_error($this->connect));
-                    exit();
+                if ($row = mysqli_fetch_assoc($result)) {
+                    $hashedPassCheck = password_verify($password, $row["password"]);
+                    if ($hashedPassCheck == true) {
+                        $newPassword = password_hash($password, PASSWORD_DEFAULT);
+                        $sql = "UPDATE " . $this->table .
+                        " SET password='" . $newPassword . "' WHERE id='" . $id . "'";
+                        $result = mysqli_query($this->connect, $sql);
+                        if ($result) {
+                            $this->sendUserMsg("success", "Parola a fost schimbata cu succes");
+                            exit();
+                        } else {
+                            $this->sendUserMsg("danger", "Eroare BD " . mysqli_error($this->connect));
+                            exit();
+                        }
+                        exit();
+                    } else {
+                        $this->sendUserMsg("danger", "Parola este incorecta");
+                        exit();
+                    }
                 }
             }
-
         }
     }
 }

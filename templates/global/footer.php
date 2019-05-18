@@ -19,11 +19,14 @@
                             <h6>My Account</h6>
                             <ul class="list-unstyled">
                                 <?php if (loggedIn()) { ?>
-                                <li><a href="<?php echo ROOT_URL; ?>account">Dashboard</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>account?sec=info">Dashboard</a></li>
                                 <li><a href="<?php echo LOGOUT; ?>">Logout</a></li>
+                                    <?php if (isAdmin()) { ?>
+                                    <li><a href="<?php echo ROOT_URL; ?>admin">Administrare</a></li>
+                                    <?php } ?>
                                 <?php } else { ?>
-                                <li><a href="<?php echo ROOT_URL; ?>authentification">Login</a></li>
-                                <li><a href="<?php echo ROOT_URL; ?>authentification?auth=register">Inregistrare</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>auth">Login</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>auth?auth=register">Inregistrare</a></li>
                                 <?php } ?>
                             </ul>
                         </div>

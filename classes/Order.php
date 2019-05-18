@@ -10,7 +10,7 @@ class Order extends Database {
             $this->sendUserMsg("danger", "Comanda nu poate fi plasata");
             exit();
         } else {
-            $sql = "INSERT INTO " . $this->table . " (id_user, id_address, details) VALUES ('" . $info["id_user"] . "','" . $info["id_address"] . "','" . $info["details"] . "')";
+            $sql = "INSERT INTO " . $this->table . " (id_user, id_address, details, total_price) VALUES ('" . $info["id_user"] . "','" . $info["id_address"] . "','" . $info["details"] . "','" . $info["total_price"] . "')";
             $result = mysqli_query($this->connect, $sql);
             if ($result) {
                 $last_id = $this->connect->insert_id;
@@ -31,6 +31,18 @@ class Order extends Database {
                 $this->sendUserMsg("danger", "Eroare BD: " . mysqli_error($this->connect));
                 exit();
             }
+        }
+    }
+
+    public function setStatus($status, $id) {
+        $sql = "UPDATE " . $this->table . " SET status='" . $status . "' WHERE id='" . $id . "'";
+        $query = mysqli_query($this->connect, $sql);
+        if ($query) {
+            $this->sendUserMsg("success", "Comanda a fost actualizata.");
+            exit();
+        } else {
+            $this->sendUserMsg("danger", "Eroare BD " . mysqli_error($this->connect));
+            exit();
         }
     }
 }

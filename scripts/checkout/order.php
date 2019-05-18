@@ -13,7 +13,8 @@ if (isset($_POST["action"]) && $_POST["action"] === "placeOrder") {
     $info = array(
         "id_user" => $_SESSION["id"],
         "id_address" => $_POST["id_address"],
-        "details" => $_POST["order_details"]
+        "details" => $_POST["order_details"],
+        "total_price" => $_POST["total_price"]
     );
 
     $order->create($info, $articles);

@@ -34,7 +34,7 @@ class Database {
      * ACTION - READ
      */
     public function getData($table) {
-        $sql = "SELECT * FROM " . $table;
+        $sql = "SELECT * FROM " . $table . " ORDER BY id DESC";
         $array = array();
         $query = mysqli_query($this->connect, $sql);
 
@@ -70,7 +70,7 @@ class Database {
         $array = array();
         $query = mysqli_query($this->connect, $sql);
 
-        if ($query->num_rows > 0) {
+        if ($query && $query->num_rows > 0) {
             while ($row = mysqli_fetch_assoc($query)) {
                 $array[] = $row;
             }

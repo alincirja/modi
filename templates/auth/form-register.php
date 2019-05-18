@@ -39,6 +39,6 @@
                 </form>
             </div>
         </div>
-        <div class="text-center mt-2"><small><a href="<?php echo ROOT_URL; ?>authentification">Sunt deja inregistrat</a></small></div>
+        <div class="text-center mt-2"><small><a href="<?php echo ROOT_URL; ?>auth">Sunt deja inregistrat</a></small></div>
     </div>
 </div>
