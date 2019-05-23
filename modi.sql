@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: apr. 10, 2019 la 10:39 PM
+-- Timp de generare: mai 23, 2019 la 11:33 AM
 -- Versiune server: 10.1.32-MariaDB
 -- Versiune PHP: 7.2.5
 
@@ -44,7 +44,8 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`id`, `name`, `phone`, `address`, `city`, `county`, `id_user`) VALUES
 (4, 'Alin', '0749621399', 'Str. Fara Nume, nr. 11', 'Fagaras', 'Brasov', 1),
-(5, 'Marius', '0747382488', 'Str. Fara Nume, nr. 11', 'Sacele', 'Brasov', 1);
+(5, 'Marius', '0747382488', 'Str. Fara Nume, nr. 11', 'Sacele', 'Brasov', 1),
+(7, 'Diana Cirja', '0747847484', 'Some Street, name, number 12', 'Aha', 'Toplita', 2);
 
 -- --------------------------------------------------------
 
@@ -57,18 +58,19 @@ CREATE TABLE `article` (
   `name` varchar(99) NOT NULL,
   `id_category` int(11) NOT NULL,
   `description` longtext,
-  `date_start` datetime DEFAULT NULL,
-  `date_end` datetime DEFAULT NULL,
-  `price` double NOT NULL
+  `date_start` varchar(55) DEFAULT NULL,
+  `date_end` varchar(55) DEFAULT NULL,
+  `price` double NOT NULL,
+  `measure` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `article`
 --
 
-INSERT INTO `article` (`id`, `name`, `id_category`, `description`, `date_start`, `date_end`, `price`) VALUES
-(1, 'Paine', 26, NULL, NULL, NULL, 1.2),
-(2, 'Antonia', 32, 'Locatie: Sala Polivalenta<br>Pentru bilete VIP, sunati la: 0847394547', '2019-04-30 20:00:00', '2019-04-30 23:00:00', 25);
+INSERT INTO `article` (`id`, `name`, `id_category`, `description`, `date_start`, `date_end`, `price`, `measure`) VALUES
+(1, 'Paine', 26, NULL, NULL, NULL, 1.2, 'buc'),
+(2, 'Antonia', 32, 'Locatie: Sala Polivalenta<br>Pentru bilete VIP, sunati la: 0847394547', '2019-04-30 20:00:00', '2019-04-30 23:00:00', 25, 'bilet');
 
 -- --------------------------------------------------------
 
@@ -88,11 +90,17 @@ CREATE TABLE `article_image` (
 --
 
 INSERT INTO `article_image` (`id`, `id_article`, `id_image`, `featured`) VALUES
-(1, 1, 3, 1),
 (2, 1, 5, 0),
 (3, 1, 4, 0),
 (4, 1, 2, 0),
-(5, 2, 6, 0);
+(5, 2, 6, 0),
+(7, 1, 2, 0),
+(9, 1, 2, 0),
+(10, 1, 2, 0),
+(11, 1, 2, 0),
+(12, 1, 2, 0),
+(13, 2, 6, 0),
+(15, 5, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -143,20 +151,19 @@ CREATE TABLE `favorite_store` (
 
 CREATE TABLE `image` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL
+  `name` text NOT NULL,
+  `title` varchar(155) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `image`
 --
 
-INSERT INTO `image` (`id`, `name`) VALUES
-(1, 'blank.png'),
-(2, 'baked-bakery-blur-209403.jpg'),
-(3, 'baked-baker-ball-shaped-745988.jpg'),
-(4, 'bake-baking-bread-209291.jpg'),
-(5, 'baguette-bakery-bread-5802.jpg'),
-(6, 'band-concert-dark-1699161.jpg');
+INSERT INTO `image` (`id`, `name`, `title`) VALUES
+(2, 'baked-bakery-blur-209403.jpg', NULL),
+(4, 'bake-baking-bread-209291.jpg', NULL),
+(5, 'baguette-bakery-bread-5802.jpg', NULL),
+(6, 'band-concert-dark-1699161.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -176,11 +183,13 @@ CREATE TABLE `order_article` (
 --
 
 INSERT INTO `order_article` (`id`, `id_order`, `id_article`, `quantity`) VALUES
-(3, 9, 1, 3),
-(4, 9, 2, 1),
-(5, 10, 1, 1),
-(6, 14, 2, 1),
-(7, 15, 1, 2);
+(13, 21, 1, 1),
+(14, 22, 1, 3),
+(15, 22, 2, 1),
+(16, 23, 1, 4),
+(17, 23, 2, 3),
+(18, 24, 2, 3),
+(19, 25, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -193,18 +202,21 @@ CREATE TABLE `order_list` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_user` int(11) NOT NULL,
   `id_address` int(11) NOT NULL,
-  `details` longtext
+  `details` longtext,
+  `total_price` float NOT NULL,
+  `status` varchar(55) NOT NULL DEFAULT 'Comanda plasata'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `order_list`
 --
 
-INSERT INTO `order_list` (`id`, `date`, `id_user`, `id_address`, `details`) VALUES
-(9, '2019-04-09 20:28:24', 1, 5, 'Some teste'),
-(10, '2019-04-09 20:30:37', 1, 4, ''),
-(14, '2019-04-09 20:33:29', 1, 4, ''),
-(15, '2019-04-10 17:52:06', 1, 5, 'test');
+INSERT INTO `order_list` (`id`, `date`, `id_user`, `id_address`, `details`, `total_price`, `status`) VALUES
+(21, '2019-04-13 20:30:40', 1, 4, '', 1.2, 'Comanda plasata'),
+(22, '2019-04-14 13:03:54', 1, 4, '', 28.6, 'Comanda anulata'),
+(23, '2019-04-21 15:08:57', 1, 5, 'Test', 79.8, 'Comanda plasata'),
+(24, '2019-04-21 15:16:10', 2, 7, 'Something that need to take attention and procced... ma rog...', 75, 'Comanda plasata'),
+(25, '2019-05-01 14:30:22', 1, 4, '', 2.4, 'Comanda plasata');
 
 -- --------------------------------------------------------
 
@@ -249,7 +261,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `register_date`, `rights`, `phone`) VALUES
-(1, 'Alin', 'Cirja', 'alin@alin.ro', '$2y$10$H.gzfhUjlJ3lsyhZeXmjze.4Z05TNldT4bz3.ljYyLmyDUcIzNuC6', '2019-03-29 16:36:14', '', '');
+(1, 'Alin', 'Cirja', 'alin@alin.ro', '$2y$10$aHrNoFlF32gprYdL2kC3zOLdahWNkwdl2We7dS1SsgTA4QpCSrD8C', '2019-03-29 16:36:14', 'admin', '0874937459'),
+(2, 'Diana', 'Didi', 'diana@didi.com', '$2y$10$4GcBgN3O9IOYklqcdBlZWet8.3haT8h94JQ0L81jeDwwlrMZeSA9e', '2019-04-21 15:13:56', '', '');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -281,8 +294,7 @@ ALTER TABLE `article_image`
 -- Indexuri pentru tabele `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `slug` (`slug`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexuri pentru tabele `favorite_store`
@@ -334,7 +346,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pentru tabele `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pentru tabele `article`
@@ -346,7 +358,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT pentru tabele `article_image`
 --
 ALTER TABLE `article_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pentru tabele `category`
@@ -370,13 +382,13 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT pentru tabele `order_article`
 --
 ALTER TABLE `order_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pentru tabele `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT pentru tabele `store`
@@ -388,7 +400,7 @@ ALTER TABLE `store`
 -- AUTO_INCREMENT pentru tabele `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constrângeri pentru tabele eliminate
@@ -401,38 +413,11 @@ ALTER TABLE `address`
   ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constrângeri pentru tabele `article`
---
-ALTER TABLE `article`
-  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constrângeri pentru tabele `article_image`
---
-ALTER TABLE `article_image`
-  ADD CONSTRAINT `article_image_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `article_image_ibfk_2` FOREIGN KEY (`id_image`) REFERENCES `image` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constrângeri pentru tabele `favorite_store`
 --
 ALTER TABLE `favorite_store`
   ADD CONSTRAINT `favorite_store_ibfk_1` FOREIGN KEY (`id_store`) REFERENCES `store` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `favorite_store_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constrângeri pentru tabele `order_article`
---
-ALTER TABLE `order_article`
-  ADD CONSTRAINT `order_article_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order_article_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `order_list` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constrângeri pentru tabele `order_list`
---
-ALTER TABLE `order_list`
-  ADD CONSTRAINT `order_list_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `order_list_ibfk_2` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
