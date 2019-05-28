@@ -88,7 +88,7 @@ class Database {
         $sql .= "('" . implode("','", array_values($fields)) . "')";
         $query = mysqli_query($this->connect, $sql);
         if ($query) {
-            $this->sendUserMsg("success", "Inregistrarea a fost adaugata.");
+            return true;
             exit();
         } else {
             $this->sendUserMsg("danger", "Eroare BD: " . mysqli_error($this->connect));

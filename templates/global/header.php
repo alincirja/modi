@@ -37,7 +37,7 @@
                         <nav id="nav" class="site-nav">
                             <ul class="nav">
                                 <li><a href="<?php echo ROOT_URL; ?>">Acasa</a></li>
-                                <li><a href="<?php echo ROOT_URL; ?>shop">Modi Shop</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>shop">Silvia Shop</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>about">Despre</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>faq">Q&A</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>feedback">Feedback</a></li>

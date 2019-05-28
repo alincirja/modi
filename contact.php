@@ -20,7 +20,7 @@
                             <div class="contact-item d-flex flex-nowrap">
                                 <div class="icon"><i class="fas fa-fw fa-map-marked-alt"></i></div>
                                 <div class="info">
-                                    <p><span class="text-primary">Adresa:</span> 121, MODI Strada Iuliu Maniu Brasov, BV 546532, Romania</p>
+                                    <p><span class="text-primary">Adresa:</span> 121, Silvia Help Zone Strada Iuliu Maniu Brasov, BV 546532, Romania</p>
                                 </div>
                             </div>
                             <div class="contact-item d-flex flex-nowrap">
@@ -32,7 +32,7 @@
                             <div class="contact-item d-flex flex-nowrap">
                                 <div class="icon"><i class="fas fa-fw fa-envelope"></i></div>
                                 <div class="info">
-                                    <p><span class="text-primary">Email:</span> contact@modi.ro</p>
+                                    <p><span class="text-primary">Email:</span> contact@silviahelpzone.ro</p>
                                 </div>
                             </div>
                         </div>

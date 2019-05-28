@@ -5,7 +5,7 @@
 
     include_once "templates/global/header.php";
 
-    setPageHeading("MODI Shop");
+    setPageHeading("Silvia Shop");
 ?>
 
 <section id="main" class="main-content main-content-shop">
