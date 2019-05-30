@@ -12,6 +12,7 @@ require("./js/global");
 require("./js/shop");
 require("./js/address");
 require("./js/admin");
+require("./js/charts");
 
 
 /**

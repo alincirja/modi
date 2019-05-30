@@ -41,6 +41,7 @@
                                 <li><a href="<?php echo ROOT_URL; ?>about">Despre</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>faq">Q&A</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>feedback">Feedback</a></li>
+                                <li><a href="<?php echo ROOT_URL; ?>stats">Statistici</a></li>
                                 <li><a href="<?php echo ROOT_URL; ?>contact">Contact</a></li>
                             </ul>
                         </nav>
