@@ -100,7 +100,7 @@ class Database {
      * ACTION - DELETE BY ID
      */
 
-     public function deleteById($table, $id) {
+    public function deleteById($table, $id) {
         $sql = "DELETE FROM " . $table . " WHERE id='" . $id . "'";
         $query = mysqli_query($this->connect, $sql);
         if ($query) {
@@ -110,5 +110,23 @@ class Database {
             $this->sendUserMsg("danger", "Eroare BD: " . mysqli_error($this->connect));
             exit();
         }
-     }
+    }
+
+    public function updateEntry($table, $id, $fields) {
+        $set = "";
+        $i = 0;
+        foreach ($fields as $key => $value) {
+            $set .= $key . "=" . $value;
+            $set .= ++$i === count($fields) ? "" : ", ";
+        }
+        $sql = "UPDATE " . $table . " SET " . $set . " WHERE id='" . $id . "'";
+        $query = mysqli_query($this->connect, $sql);
+        if ($query) {
+            $this->sendUserMsg("success", "Comanda a fost actualizata.");
+            exit();
+        } else {
+            $this->sendUserMsg("danger", "Eroare BD " . mysqli_error($this->connect));
+            exit();
+        }
+    }
 }

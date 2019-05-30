@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: mai 23, 2019 la 11:33 AM
+-- Timp de generare: mai 31, 2019 la 01:32 AM
 -- Versiune server: 10.1.32-MariaDB
 -- Versiune PHP: 7.2.5
 
@@ -45,7 +45,8 @@ CREATE TABLE `address` (
 INSERT INTO `address` (`id`, `name`, `phone`, `address`, `city`, `county`, `id_user`) VALUES
 (4, 'Alin', '0749621399', 'Str. Fara Nume, nr. 11', 'Fagaras', 'Brasov', 1),
 (5, 'Marius', '0747382488', 'Str. Fara Nume, nr. 11', 'Sacele', 'Brasov', 1),
-(7, 'Diana Cirja', '0747847484', 'Some Street, name, number 12', 'Aha', 'Toplita', 2);
+(7, 'Diana Cirja', '0747847484', 'Some Street, name, number 12', 'Aha', 'Toplita', 2),
+(8, 'Nicu', '0749621399', 'Some Street, name, number 12', 'Sacele', 'Toplita', 4);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,8 @@ CREATE TABLE `article` (
 
 INSERT INTO `article` (`id`, `name`, `id_category`, `description`, `date_start`, `date_end`, `price`, `measure`) VALUES
 (1, 'Paine', 26, NULL, NULL, NULL, 1.2, 'buc'),
-(2, 'Antonia', 32, 'Locatie: Sala Polivalenta<br>Pentru bilete VIP, sunati la: 0847394547', '2019-04-30 20:00:00', '2019-04-30 23:00:00', 25, 'bilet');
+(2, 'Antonia', 32, 'Locatie: Sala Polivalenta<br>Pentru bilete VIP, sunati la: 0847394547', '2019-04-30 20:00:00', '2019-04-30 23:00:00', 25, 'bilet'),
+(3, 'Test', 31, 'Test descriere', ' ', ' ', 45, 'buc');
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,8 @@ INSERT INTO `article_image` (`id`, `id_article`, `id_image`, `featured`) VALUES
 (11, 1, 2, 0),
 (12, 1, 2, 0),
 (13, 2, 6, 0),
-(15, 5, 4, 0);
+(15, 5, 4, 0),
+(20, 3, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -134,6 +137,38 @@ INSERT INTO `category` (`id`, `id_parent`, `slug`, `name`, `name_plural`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structură tabel pentru tabel `contact`
+--
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `email` text NOT NULL,
+  `phone` varchar(12) NOT NULL,
+  `subject` text NOT NULL,
+  `title` text,
+  `message` longtext NOT NULL,
+  `occupation` text,
+  `new` tinyint(1) NOT NULL DEFAULT '1',
+  `public` tinyint(1) NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Eliminarea datelor din tabel `contact`
+--
+
+INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `subject`, `title`, `message`, `occupation`, `new`, `public`, `time`) VALUES
+(2, 'Alin', 'alin@asd.com', '0784858343', 'contact', '', 'test', '', 0, 0, '2019-05-30 23:14:30'),
+(3, 'Jon Snow', 'jon@snow.com', '0784858343', 'feedback', '', 'E un fapt bine stabilit cÄƒ cititorul va fi sustras de conÅ£inutul citibil al unei pagini atunci cÃ¢nd se uitÄƒ la aÅŸezarea Ã®n paginÄƒ. Scopul utilizÄƒrii a Lorem Ipsum, este acela cÄƒ are o distribuÅ£ie a literelor mai mult sau mai puÅ£in normale, faÅ£Äƒ de utilizarea', 'Ranger', 0, 0, '2019-05-31 00:53:47'),
+(4, 'Brandon Stark', 'bran@stark.com', '0784858343', 'complaint', '', 'E un fapt bine stabilit cÄƒ cititorul va fi sustras de conÅ£inutul citibil al unei pagini atunci cÃ¢nd se uitÄƒ la aÅŸezarea Ã®n paginÄƒ. Scopul utilizÄƒrii a Lorem Ipsum, este acela cÄƒ are o distribuÅ£ie a literelor mai mult sau mai puÅ£in normale, faÅ£Äƒ de utilizarea', '', 1, 0, '2019-05-31 00:54:13'),
+(5, 'Sansa Stark', 'sansa@stark.com', '0784858343', 'contact', '', 'E un fapt bine stabilit cÄƒ cititorul va fi sustras de conÅ£inutul citibil al unei pagini atunci cÃ¢nd se uitÄƒ la aÅŸezarea Ã®n paginÄƒ. Scopul utilizÄƒrii a Lorem Ipsum, este acela cÄƒ are o distribuÅ£ie a literelor mai mult sau mai puÅ£in normale, faÅ£Äƒ de utilizarea', '', 1, 0, '2019-05-31 00:54:35'),
+(6, 'Tywin Lanister', 'tywin@lanister.com', '0784858343', 'feedback', 'Lanisters send their regards', 'E un fapt bine stabilit cÄƒ cititorul va fi sustras de conÅ£inutul citibil al unei pagini atunci cÃ¢nd se uitÄƒ la aÅŸezarea Ã®n paginÄƒ. Scopul utilizÄƒrii a Lorem Ipsum, este acela cÄƒ are o distribuÅ£ie a literelor mai mult sau mai puÅ£in normale, faÅ£Äƒ de utilizarea', 'Hand of the King', 0, 1, '2019-05-31 01:51:32'),
+(7, 'Daenerys Targaryen', 'dany@drogon.com', '0784858343', 'feedback', 'Burn them all', 'E un fapt bine stabilit cÄƒ cititorul va fi sustras de conÅ£inutul citibil al unei pagini atunci', 'Mad Queen', 0, 1, '2019-05-31 02:02:35');
+
+-- --------------------------------------------------------
+
+--
 -- Structură tabel pentru tabel `favorite_store`
 --
 
@@ -163,7 +198,8 @@ INSERT INTO `image` (`id`, `name`, `title`) VALUES
 (2, 'baked-bakery-blur-209403.jpg', NULL),
 (4, 'bake-baking-bread-209291.jpg', NULL),
 (5, 'baguette-bakery-bread-5802.jpg', NULL),
-(6, 'band-concert-dark-1699161.jpg', NULL);
+(6, 'band-concert-dark-1699161.jpg', NULL),
+(8, '5ce6e2486f4f73181back3.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -189,7 +225,8 @@ INSERT INTO `order_article` (`id`, `id_order`, `id_article`, `quantity`) VALUES
 (16, 23, 1, 4),
 (17, 23, 2, 3),
 (18, 24, 2, 3),
-(19, 25, 1, 2);
+(19, 25, 1, 2),
+(20, 26, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -215,8 +252,9 @@ INSERT INTO `order_list` (`id`, `date`, `id_user`, `id_address`, `details`, `tot
 (21, '2019-04-13 20:30:40', 1, 4, '', 1.2, 'Comanda plasata'),
 (22, '2019-04-14 13:03:54', 1, 4, '', 28.6, 'Comanda anulata'),
 (23, '2019-04-21 15:08:57', 1, 5, 'Test', 79.8, 'Comanda plasata'),
-(24, '2019-04-21 15:16:10', 2, 7, 'Something that need to take attention and procced... ma rog...', 75, 'Comanda plasata'),
-(25, '2019-05-01 14:30:22', 1, 4, '', 2.4, 'Comanda plasata');
+(24, '2019-04-21 15:16:10', 2, 7, 'Something that need to take attention and procced... ma rog...', 75, 'Comanda livrata'),
+(25, '2019-05-01 14:30:22', 1, 4, '', 2.4, 'Comanda plasata'),
+(26, '2019-05-30 18:58:23', 4, 8, '', 45, 'Comanda plasata');
 
 -- --------------------------------------------------------
 
@@ -253,16 +291,20 @@ CREATE TABLE `user` (
   `password` text NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rights` varchar(5) NOT NULL,
-  `phone` text NOT NULL
+  `phone` text NOT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `user`
 --
 
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `register_date`, `rights`, `phone`) VALUES
-(1, 'Alin', 'Cirja', 'alin@alin.ro', '$2y$10$aHrNoFlF32gprYdL2kC3zOLdahWNkwdl2We7dS1SsgTA4QpCSrD8C', '2019-03-29 16:36:14', 'admin', '0874937459'),
-(2, 'Diana', 'Didi', 'diana@didi.com', '$2y$10$4GcBgN3O9IOYklqcdBlZWet8.3haT8h94JQ0L81jeDwwlrMZeSA9e', '2019-04-21 15:13:56', '', '');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`, `password`, `register_date`, `rights`, `phone`, `age`, `sex`) VALUES
+(1, 'Alin', 'Cirja', 'alin@alin.ro', '$2y$10$aHrNoFlF32gprYdL2kC3zOLdahWNkwdl2We7dS1SsgTA4QpCSrD8C', '2019-03-29 16:36:14', 'admin', '0874937459', NULL, NULL),
+(2, 'Diana', 'Didi', 'diana@didi.com', '$2y$10$4GcBgN3O9IOYklqcdBlZWet8.3haT8h94JQ0L81jeDwwlrMZeSA9e', '2019-04-21 15:13:56', '', '', NULL, NULL),
+(3, 'Test', 'Test', 'test@test.com', '$2y$10$Lp7M5IHDa5BetF.YeWhruOMcOj1QZP6MaEXM4//jEH2xCD8VkdbtS', '2019-05-30 16:15:36', '', '', NULL, NULL),
+(4, 'Test', 'Test', 'test1@test.com', '$2y$10$Yv.stxkf0XAhRaGnOtL1VeBQJWXKKQQEgog6wJlE8gljOM9VfpaD2', '2019-05-30 18:55:03', '', '', 13, 'masculin');
 
 --
 -- Indexuri pentru tabele eliminate
@@ -294,6 +336,12 @@ ALTER TABLE `article_image`
 -- Indexuri pentru tabele `category`
 --
 ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexuri pentru tabele `contact`
+--
+ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -346,25 +394,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pentru tabele `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pentru tabele `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pentru tabele `article_image`
 --
 ALTER TABLE `article_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pentru tabele `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT pentru tabele `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pentru tabele `favorite_store`
@@ -376,19 +430,19 @@ ALTER TABLE `favorite_store`
 -- AUTO_INCREMENT pentru tabele `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pentru tabele `order_article`
 --
 ALTER TABLE `order_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pentru tabele `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pentru tabele `store`
@@ -400,7 +454,7 @@ ALTER TABLE `store`
 -- AUTO_INCREMENT pentru tabele `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constrângeri pentru tabele eliminate

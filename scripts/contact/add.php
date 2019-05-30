@@ -9,7 +9,8 @@ if (isset($_POST["submitContact"])) {
         "phone" => mysqli_real_escape_string($action->connect, $_POST["contactPhone"]),
         "subject" => mysqli_real_escape_string($action->connect, $_POST["contactSubject"]),
         "message" => mysqli_real_escape_string($action->connect, $_POST["contactMessage"]),
-        "occupation" => mysqli_real_escape_string($action->connect, $_POST["contactOccupation"])
+        "occupation" => mysqli_real_escape_string($action->connect, $_POST["contactOccupation"]),
+        "title" => mysqli_real_escape_string($action->connect, $_POST["contactTitle"])
     );
 
     $messageSent = $action->insertData("contact", $fields);

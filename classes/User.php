@@ -46,7 +46,7 @@ class User extends Database {
                         $info["hashedPass"] = password_hash($info["password"], PASSWORD_DEFAULT);
                         
                         //Insert user
-                        $sql = "INSERT INTO " . $this->table . " (first_name, last_name, email, password) VALUES ('" . $info["fname"] . "', '" . $info["lname"] . "', '" . $info["email"] . "', '" . $info["hashedPass"] . "')";
+                        $sql = "INSERT INTO " . $this->table . " (first_name, last_name, email, password, age, sex) VALUES ('" . $info["fname"] . "', '" . $info["lname"] . "', '" . $info["email"] . "', '" . $info["hashedPass"] . "', '" . $info["age"] . "', '" . $info["sex"] . "')";
                         $result = mysqli_query($this->connect, $sql);
                         if ($result) {
                             $this->sendUserMsg("success", "Contul a fost creat.");

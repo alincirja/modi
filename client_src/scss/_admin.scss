@@ -125,4 +125,58 @@
             }
         }
     }
+
+    .messages-list {
+        padding: 0;
+        margin: 0;
+
+        li {
+            cursor: pointer;
+            padding: 10px 15px 10px 0;
+            transition: all .3s;
+
+            &:hover {
+                background-color: rgba($black, .05);
+                padding-left: 15px;
+            }
+
+            & + li {
+                border-top: 1px solid rgba($black, .1);
+            }
+
+            &.active {
+                background-color: $primary;
+                color: $white;
+                padding-left: 15px;
+            }
+
+            time {
+                font-size: 12px;
+                font-style: italic;
+                display: block;
+            }
+
+            .name {
+                line-height: 1;
+            }
+
+            &.new {
+                .name {
+                    &:after {
+                        content: "nou";
+                        display: inline-block;
+                        background-color: $danger;
+                        color: $white;
+                        font-size: 8px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        padding: 2px 3px;
+                        border-radius: 2px;
+                        vertical-align: middle;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
 }

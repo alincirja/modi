@@ -28,11 +28,26 @@
                                 <input type="password" class="form-control" name="registerPassword" id="registerPassword" placeholder="Parola">
                             </div>
                         </div>
+                        <div class="col-6 col-md-3">
+                            <div class="form-group">
+                                <label for="registerAge">Varsta</label>
+                                <input type="number" class="form-control" name="registerAge" id="registerAge" min="13" max="120" placeholder="21">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="form-group">
+                                <label for="registerSex">Gen</label>
+                                <select class="form-control" name="registerSex" id="registerSex">
+                                    <option value="masculin">Masculin</option>
+                                    <option value="feminin">Feminin</option>
+                                </select>
+                            </div>
+                        </div>
                     </div><!--/.row-->
                     
                     
                     <div class="row mt-4">
-                        <div class="col-6 mx-auto">
+                        <div class="col-md-6 mx-auto">
                             <button type="submit" class="btn btn-lg btn-block btn-primary">Inregistrare</button>
                         </div>
                     </div>

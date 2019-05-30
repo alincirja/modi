@@ -16,8 +16,10 @@ $("#contactSubject").on("change", e => {
     const value = $(e.currentTarget).val();
     if (value === "feedback") {
         $(".occupation-wrap").removeClass("d-none").find("input").attr("required", true);
+        $(".title-wrap").removeClass("d-none").find("input").attr("required", true);
     } else {
         $(".occupation-wrap").addClass("d-none").find("input").attr("required", false);
+        $(".title-wrap").addClass("d-none").find("input").attr("required", false);
     }
 });
 

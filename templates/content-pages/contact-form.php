@@ -30,6 +30,11 @@
                 <input type="text" class="form-control" placeholder="Ocupatie" id="contactOccupation" name="contactOccupation">
             </div>
         </div>
+        <div class="col-12 col-lg-6 title-wrap d-none">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Titlu Feedback" id="contactTitle" name="contactTitle">
+            </div>
+        </div>
         <div class="col-12">
             <div class="form-group">
                 <textarea name="contactMessage" id="contactMessage" placeholder="Mesaj" class="form-control" rows="6"></textarea>

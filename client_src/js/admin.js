@@ -227,3 +227,65 @@ $(document).on("click", ".deleteArticle", e => {
         }
     });
 });
+
+$(document).on("click", ".message-item", e => {
+    e.stopPropagation();
+    $(e.currentTarget).siblings().removeClass("active");
+    $.ajax({
+        url: $(e.currentTarget).attr("data-url"),
+        type: "GET",
+        success: res => {
+            $("#messageTemplate").html(res);
+            $(e.currentTarget).addClass("active");
+            if ($(e.currentTarget).hasClass("new")) {
+                $.ajax({
+                    url: "scripts/contact/status.php",
+                    type: "POST",
+                    data: {
+                        "mark": "read",
+                        "id": $(e.currentTarget).attr("data-id")
+                    },
+                    success: res => {
+                        const dataJSON = JSON.parse(res);
+                        if (dataJSON.type === "success") {
+                            $(e.currentTarget).removeClass("new");
+                        }
+                    },
+                    error: err => {
+                        console.log(err);
+                    }
+                })
+            }
+        }
+    });
+});
+
+$(document).on("click", ".set-msg-status", e => {
+    e.preventDefault();
+    const $this = $(e.currentTarget);
+    $.ajax({
+        url: $this.attr("href"),
+        type: "POST",
+        data: {
+            "mark": $this.attr("data-mark"),
+            "id": $this.attr("data-id")
+        },
+        success: res => {
+            $(".message-item[data-id=" + $this.attr("data-id") + "]").trigger("click");
+        }
+    });
+});
+
+$("#subjectFilter").on("change", e => {
+    const value = $(e.currentTarget).val();
+    if (value) {
+        $(".messages-list").find("li").map((index, item) => {
+            $(item).show();
+            if ($(item).data("filter") != value) {
+                $(item).hide();
+            }
+        });
+    } else {
+        $(".messages-list").find("li").show();
+    }
+});
