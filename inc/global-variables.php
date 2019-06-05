@@ -1,12 +1,12 @@
 <?php
 // Site Vars
-define("SITE", "Silvia Help Zone");
-define("TAGLINE", "Ajutorul tau de incredere");
+define("SITE", "Open Road");
+define("TAGLINE", "Always on the road for our customer's desire");
 define("CURRENCY", "RON");
 
 // Define URL
-define("ROOT_PATH", "/silviahelpzone/");
-define("ROOT_URL", "http://localhost:82/silviahelpzone/");
+define("ROOT_PATH", "/openroad/");
+define("ROOT_URL", "http://localhost:82/openroad/");
 
 define("PATH_STATIC", ROOT_PATH . "static/");
 define("PATH_IMG", PATH_STATIC . "img/");
@@ -60,7 +60,7 @@ function setSeo($slug = "index") {
         "contact" => array(
             "title" => "Contact | " . SITE,
             "description" => TAGLINE,
-            "keywords" => "contact Silvia Help Zone caritate"
+            "keywords" => "contact Open Road caritate"
         )
     );
 

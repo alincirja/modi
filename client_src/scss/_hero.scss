@@ -1,7 +1,6 @@
 .hero {
     height: 100vh;
     background-image: linear-gradient(rgba($black, 0.5),rgba($black, 0.5)),url("../img/home-bg.jpg");
-    height: 100vh;
     background-size: cover;
     background-position: center;
 
@@ -9,7 +8,7 @@
         color: $white;
         text-align: center;
         margin: 25px 0 50px;
-        font-size: 55px;
+        font-size: 45px;
     }
 
     h3 {
