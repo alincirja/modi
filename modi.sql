@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: mai 31, 2019 la 01:32 AM
+-- Timp de generare: iun. 09, 2019 la 07:12 PM
 -- Versiune server: 10.1.32-MariaDB
 -- Versiune PHP: 7.2.5
 
@@ -46,7 +46,8 @@ INSERT INTO `address` (`id`, `name`, `phone`, `address`, `city`, `county`, `id_u
 (4, 'Alin', '0749621399', 'Str. Fara Nume, nr. 11', 'Fagaras', 'Brasov', 1),
 (5, 'Marius', '0747382488', 'Str. Fara Nume, nr. 11', 'Sacele', 'Brasov', 1),
 (7, 'Diana Cirja', '0747847484', 'Some Street, name, number 12', 'Aha', 'Toplita', 2),
-(8, 'Nicu', '0749621399', 'Some Street, name, number 12', 'Sacele', 'Toplita', 4);
+(8, 'Nicu', '0749621399', 'Some Street, name, number 12', 'Sacele', 'Toplita', 4),
+(9, 'Alin', '0749621399', 'Some Street, name, number 12', 'Fagaras', 'Brasov', 3);
 
 -- --------------------------------------------------------
 
@@ -169,18 +170,6 @@ INSERT INTO `contact` (`id`, `name`, `email`, `phone`, `subject`, `title`, `mess
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `favorite_store`
---
-
-CREATE TABLE `favorite_store` (
-  `id` int(11) NOT NULL,
-  `id_store` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Structură tabel pentru tabel `image`
 --
 
@@ -219,14 +208,18 @@ CREATE TABLE `order_article` (
 --
 
 INSERT INTO `order_article` (`id`, `id_order`, `id_article`, `quantity`) VALUES
-(13, 21, 1, 1),
-(14, 22, 1, 3),
-(15, 22, 2, 1),
-(16, 23, 1, 4),
-(17, 23, 2, 3),
-(18, 24, 2, 3),
-(19, 25, 1, 2),
-(20, 26, 3, 1);
+(21, 27, 3, 1),
+(22, 28, 1, 1),
+(23, 29, 1, 1),
+(24, 30, 1, 3),
+(25, 30, 2, 3),
+(26, 30, 3, 2),
+(27, 31, 3, 1),
+(28, 31, 1, 1),
+(29, 32, 2, 1),
+(30, 32, 1, 1),
+(31, 33, 2, 1),
+(32, 33, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -241,41 +234,24 @@ CREATE TABLE `order_list` (
   `id_address` int(11) NOT NULL,
   `details` longtext,
   `total_price` float NOT NULL,
-  `status` varchar(55) NOT NULL DEFAULT 'Comanda plasata'
+  `donation_amount` float NOT NULL,
+  `status` varchar(55) NOT NULL DEFAULT 'Comanda plasata',
+  `delivery_time` datetime NOT NULL,
+  `shipping_cost` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Eliminarea datelor din tabel `order_list`
 --
 
-INSERT INTO `order_list` (`id`, `date`, `id_user`, `id_address`, `details`, `total_price`, `status`) VALUES
-(21, '2019-04-13 20:30:40', 1, 4, '', 1.2, 'Comanda plasata'),
-(22, '2019-04-14 13:03:54', 1, 4, '', 28.6, 'Comanda anulata'),
-(23, '2019-04-21 15:08:57', 1, 5, 'Test', 79.8, 'Comanda plasata'),
-(24, '2019-04-21 15:16:10', 2, 7, 'Something that need to take attention and procced... ma rog...', 75, 'Comanda livrata'),
-(25, '2019-05-01 14:30:22', 1, 4, '', 2.4, 'Comanda plasata'),
-(26, '2019-05-30 18:58:23', 4, 8, '', 45, 'Comanda plasata');
-
--- --------------------------------------------------------
-
---
--- Structură tabel pentru tabel `store`
---
-
-CREATE TABLE `store` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Eliminarea datelor din tabel `store`
---
-
-INSERT INTO `store` (`id`, `name`) VALUES
-(1, 'lidl'),
-(2, 'kaufland'),
-(5, 'catena'),
-(6, 'bla');
+INSERT INTO `order_list` (`id`, `date`, `id_user`, `id_address`, `details`, `total_price`, `donation_amount`, `status`, `delivery_time`, `shipping_cost`) VALUES
+(27, '2019-06-06 19:00:43', 3, 9, '', 45, 0, 'Comanda livrata', '2019-06-06 23:30:00', 0),
+(28, '2019-06-09 15:37:11', 1, 4, '', 1.2, 0, 'Comanda plasata', '2019-06-19 17:55:00', 0),
+(29, '2019-06-09 15:39:24', 1, 4, '', 1.2, 0, 'Comanda plasata', '2019-06-19 08:30:00', 0),
+(30, '2019-05-16 15:41:05', 1, 4, '', 168.6, 0, 'Comanda plasata', '2019-06-13 15:45:00', 234),
+(31, '2019-06-09 15:50:42', 1, 5, '', 46.2, 0, 'Comanda plasata', '2019-06-25 08:20:00', 0),
+(32, '2019-06-09 15:52:13', 1, 4, '', 26.2, 0, 'Comanda plasata', '2019-06-19 01:05:00', 0),
+(33, '2019-06-09 16:00:23', 1, 4, '', 26.2, 1.8, 'Comanda plasata', '2019-06-09 19:55:00', 25);
 
 -- --------------------------------------------------------
 
@@ -345,14 +321,6 @@ ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `favorite_store`
---
-ALTER TABLE `favorite_store`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_store` (`id_store`),
-  ADD KEY `id_user` (`id_user`);
-
---
 -- Indexuri pentru tabele `image`
 --
 ALTER TABLE `image`
@@ -375,12 +343,6 @@ ALTER TABLE `order_list`
   ADD KEY `id_address` (`id_address`);
 
 --
--- Indexuri pentru tabele `store`
---
-ALTER TABLE `store`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexuri pentru tabele `user`
 --
 ALTER TABLE `user`
@@ -394,7 +356,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pentru tabele `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pentru tabele `article`
@@ -421,12 +383,6 @@ ALTER TABLE `contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT pentru tabele `favorite_store`
---
-ALTER TABLE `favorite_store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT pentru tabele `image`
 --
 ALTER TABLE `image`
@@ -436,19 +392,13 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT pentru tabele `order_article`
 --
 ALTER TABLE `order_article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pentru tabele `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT pentru tabele `store`
---
-ALTER TABLE `store`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT pentru tabele `user`
@@ -465,13 +415,6 @@ ALTER TABLE `user`
 --
 ALTER TABLE `address`
   ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constrângeri pentru tabele `favorite_store`
---
-ALTER TABLE `favorite_store`
-  ADD CONSTRAINT `favorite_store_ibfk_1` FOREIGN KEY (`id_store`) REFERENCES `store` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `favorite_store_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -47,13 +47,74 @@ foreach ($occur as $id => $count) {
 }
 ?>
 </ul>
-<div class="total-cart text-right">
-    <h5><span class="label">Total:</span> <strong class="value"><?php echo getVisualPrice($cartObj->getCartTotal()); ?></strong></h5>
-    <input type="hidden" name="totalPrice" value="<?php echo $cartObj->getCartTotal(); ?>">
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-8">
+        <?php if (isset($_SESSION["donation_amount"]) && $_SESSION["donation_amount"] > 0) { ?>
+            <button class="btn btn-sm btn-outline-info btn-donation" value="show">Ati donat <?php echo getVisualPrice($_SESSION["donation_amount"]); ?> <small>(editare)</small></button>
+        <?php } else { ?>
+            <button class="btn btn-info btn-donation" value="show">Doneaza</button>
+        <?php } ?>
+        <div class="alert alert-info d-none" id="donationForm">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <strong>Donez</strong> 
+                </div>
+                <div class="col-2 p-0">
+                    <input type="number" min="0" step="0.1" value="<?php echo isset($_SESSION["donation_amount"]) ? $_SESSION["donation_amount"] : 0; ?>" name="donationAmount" class="form-control">
+                </div>
+                <div class="col-auto pl-1">
+                    <small>RON</small> 
+                </div>
+                <div class="col-auto ml-auto">
+                    <button class="btn btn-sm btn-info btn-donation" value="done" data-action="addDonation" data-url="scripts/checkout/adddonation.php"><i class="fas fa-check"></i></button>
+                    <button class="btn btn-sm btn-outline-info btn-donation" value="drop" data-action="dropDonation" data-url="scripts/checkout/dropcart.php"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 ml-auto">
+        <div class="total-cart">
+            <table class="table table-borderless table-sm text-right">
+                <tr>
+                    <td>Subtotal:</td>
+                    <td>
+                        <?php echo getVisualPrice($cartObj->getCartSubTotal()); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cost livrare:</td>
+                    <td>
+                        <?php echo getVisualPrice(SHIPPING_PRICE); ?>
+                    </td>
+                </tr>
+                <?php if (isset($_SESSION["donation_amount"]) && $_SESSION["donation_amount"] > 0) { ?>
+                <tr>
+                    <td>Donatie:</td>
+                    <td>
+                        <?php echo getVisualPrice($_SESSION["donation_amount"]); ?>
+                    </td>
+                </tr>
+                <?php } ?>
+                <tr>
+                    <td><h6 class="m-0">Total:</h6></td>
+                    <td>
+                        <?php
+                            $cartTotal = $cartObj->getCartSubTotal() + SHIPPING_PRICE + (isset($_SESSION["donation_amount"]) ? $_SESSION["donation_amount"] : 0);
+                            echo getVisualPrice($cartTotal);
+                        ?>
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="orderSubtotal" value="<?php echo $cartObj->getCartSubTotal(); ?>">
+            <input type="hidden" name="orderShipping" value="<?php echo SHIPPING_PRICE; ?>">
+            <input type="hidden" name="orderDonation" value="<?php echo isset($_SESSION["donation_amount"]) ? $_SESSION["donation_amount"] : 0; ?>">
+        </div>
+    </div>
 </div>
+
+<h4 class="line-title">Livrare</h4>
 <div class="row align-items-end mt-4">
     <div class="col">
-        <h4 class="line-title">Livrare</h4>
         <div class="shipping">
         <?php
             $userAddresses = $addressObj->getByUserId($_SESSION["id"]);
@@ -87,8 +148,25 @@ foreach ($occur as $id => $count) {
         </div>
     </div>
     <div class="col">
-        <h4 class="line-title">Detalii aditionale</h4>
-        <textarea name="orderMessage" id="orderMessage" class="form-control" rows="15" placeholder="In caz de ceva, altceva..."></textarea>
+        <div class="delivery-time mb-4">
+            <h6>Data si ora livrarii</h6>
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <input type="date" name="orderDeliveryDate" id="orderDeliveryDate" class="form-control" data-today="<?php echo date("Y-m-d"); ?>" min="<?php echo date("Y-m-d"); ?>">
+                </div>
+                <div class="col-2 p-0">
+                    <input type="number" placeholder="Ora" data-current-hour="<?php echo date("H"); ?>" min="0" max="23" class="form-control" id="orderDeliveryTimeHour" name="orderDeliveryTimeHour">
+                </div>
+                <div class="col-auto">
+                    :
+                </div>
+                <div class="col-2 p-0">
+                    <input type="number" placeholder="Min" data-current-hour="<?php echo date("i"); ?>" min="0" step="5" max="59" class="form-control" id="orderDeliveryTimeMinute" name="orderDeliveryTimeMinute">
+                </div>
+            </div>
+        </div>
+        <h6>Detalii aditionale</h6>
+        <textarea name="orderMessage" id="orderMessage" class="form-control" rows="7" placeholder="In caz de ceva, altceva..."></textarea>
     </div>
 </div>
 

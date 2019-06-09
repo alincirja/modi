@@ -14,7 +14,12 @@
             <div class="col">
                 <?php $date = new DateTime($order["date"]); ?>
                 <div class="order-date">Plasata pe: <strong><?php echo $date->format("d M Y, H:i"); ?></strong></div>
-                <div class="order-total">Total <strong><?php echo getVisualPrice($order["total_price"]); ?></strong></div>
+                <small class="d-inline-block mr-3">Cost Livrare: <strong><?php echo getVisualPrice($order["shipping_cost"]); ?></strong></small>
+                <?php if ($order["donation_amount"]) { ?>
+                    <small class="d-inline-block mr-3 text-success">Donatie: <strong><?php echo getVisualPrice($order["donation_amount"]); ?></strong></small>
+                <?php } ?>
+                <small class="d-inline-block mr-3">Subtotal: <strong><?php echo getVisualPrice($order["total_price"]); ?></strong></small>
+                <div class="order-total d-inline-block alert alert-info mt-3 mb-0">Total: <strong><?php echo getVisualPrice($order["total_price"] + $order["shipping_cost"] + $order["donation_amount"]); ?></strong></div>
             </div>
             <div class="col text-right">
                 <h6 class="order-status text-primary mt-1 mb-0"><?php echo $order["status"]; ?></h6>

@@ -3,6 +3,7 @@
 define("SITE", "Open Road");
 define("TAGLINE", "Always on the road for our customer's desire");
 define("CURRENCY", "RON");
+define("SHIPPING_PRICE", 25);
 
 // Define URL
 define("ROOT_PATH", "/openroad/");
@@ -12,6 +13,8 @@ define("PATH_STATIC", ROOT_PATH . "static/");
 define("PATH_IMG", PATH_STATIC . "img/");
 
 define("LOGOUT", ROOT_PATH . "scripts/user/logout.php?session=end");
+
+date_default_timezone_set("Europe/Bucharest");
 
 // Check logged usser
 function loggedIn() {

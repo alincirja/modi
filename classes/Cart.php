@@ -2,7 +2,7 @@
 include_once "Article.php";
 
 class Cart extends Article {
-    public function getCartTotal() {
+    public function getCartSubTotal() {
         $occur = array_count_values($_SESSION["cart_articles"]);
         $total = 0;
         foreach ($occur as $id => $count) {

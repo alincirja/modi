@@ -7,10 +7,10 @@ class Order extends Database {
 
     public function create($info, $articles) {
         if (!count($info) || !count($articles) || empty($info["id_user"]) || empty($info["id_address"])) {
-            $this->sendUserMsg("danger", "Comanda nu poate fi plasata");
+            $this->sendUserMsg("danger", "Comanda nu poate fi plasata, va rugam completati adresa si data de livrare.");
             exit();
         } else {
-            $sql = "INSERT INTO " . $this->table . " (id_user, id_address, details, total_price) VALUES ('" . $info["id_user"] . "','" . $info["id_address"] . "','" . $info["details"] . "','" . $info["total_price"] . "')";
+            $sql = "INSERT INTO " . $this->table . " (id_user, id_address, details, total_price, delivery_time, donation_amount, shipping_cost) VALUES ('" . $info["id_user"] . "','" . $info["id_address"] . "','" . $info["details"] . "','" . $info["total_price"] . "','" . $info["delivery_time"] . "','" . $info["donation_amount"] . "','" . $info["shipping_cost"] . "')";
             $result = mysqli_query($this->connect, $sql);
             if ($result) {
                 $last_id = $this->connect->insert_id;

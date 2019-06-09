@@ -39,7 +39,12 @@
                 </div>
                 <div class="col-auto">
                     <label>Total</label>
-                    <div class="order-val"><?php echo getVisualPrice($order["total_price"]); ?></div>
+                    <div class="order-val">
+                        <?php echo getVisualPrice($order["total_price"]); ?>
+                        <?php if ($order["donation_amount"]) { ?>
+                            <small class="badge badge-success"><?php echo getVisualPrice($order["donation_amount"]); ?></small>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="col-auto ml-auto status-update">
                     <label>Status</label>
@@ -84,6 +89,8 @@
                     </div>
                 </div>
                 <div class="details">
+                    <label>Data si ora livrarii</label>
+                    <div class="order-val"><?php echo $order["delivery_time"] ? $order["delivery_time"] : " - "; ?></div>
                     <label>Mentiuni</label>
                     <div class="order-val"><?php echo $order["details"] ? $order["details"] : " - "; ?></div>
                 </div>
