@@ -18,7 +18,7 @@
                         <ul class="faq-list">
                             <li class="expanded">
                                 <div class="question d-flex flex-nowrap justify-content-between">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    <p>Ce este Open Road?</p>
                                     <span class="indicator">
                                         <i class="fas fa-fw fa-chevron-right ind-non-active"></i>
                                         <i class="fas fa-fw fa-chevron-down ind-active"></i>
@@ -26,14 +26,14 @@
                                 </div>
                                 <div class="answer">
                                     <div class="ans-text">
-                                        <p>Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice.</p>
-                                        <p>Lorem Ipsum a fost macheta standard a industriei încă din secolul al XVI-lea, când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru a crea o carte demonstrativă pentru literele respective.</p>
+                                        <p>Open Road este un site prin care cumpărătorii pot actiziționa produse de larg consum cu doar un click.</p>
+                                        <p>Cumpărătorii pot stabili ora și data la care să primească cumpărăturile.</p>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="question d-flex flex-nowrap justify-content-between">
-                                    <p>Aenean vel diam et diam mattis pretium eleifend eu purus.</p>
+                                    <p>Cât costă transportul?</p>
                                     <span class="indicator">
                                         <i class="fas fa-fw fa-chevron-right ind-non-active"></i>
                                         <i class="fas fa-fw fa-chevron-down ind-active"></i>
@@ -41,14 +41,14 @@
                                 </div>
                                 <div class="answer">
                                     <div class="ans-text">
-                                        <p>Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice.</p>
-                                        <p>Lorem Ipsum a fost macheta standard a industriei încă din secolul al XVI-lea, când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru a crea o carte demonstrativă pentru literele respective.</p>
+                                        <p>Costul standard de transport este de 14.99 lei.</p>
+                                        <p>Este un cost fix, indiferent de valoarea cumpărăturilor.</p>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="question d-flex flex-nowrap justify-content-between">
-                                    <p>Curabitur id tortor id dolor gravida dapibus.</p>
+                                    <p>Plata produselor?</p>
                                     <span class="indicator">
                                         <i class="fas fa-fw fa-chevron-right ind-non-active"></i>
                                         <i class="fas fa-fw fa-chevron-down ind-active"></i>
@@ -56,38 +56,9 @@
                                 </div>
                                 <div class="answer">
                                     <div class="ans-text">
-                                        <p>Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice.</p>
-                                        <p>Lorem Ipsum a fost macheta standard a industriei încă din secolul al XVI-lea, când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru a crea o carte demonstrativă pentru literele respective.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="question d-flex flex-nowrap justify-content-between">
-                                    <p>Nam vel nibh non tortor tempus vestibulum.</p>
-                                    <span class="indicator">
-                                        <i class="fas fa-fw fa-chevron-right ind-non-active"></i>
-                                        <i class="fas fa-fw fa-chevron-down ind-active"></i>
-                                    </span>
-                                </div>
-                                <div class="answer">
-                                    <div class="ans-text">
-                                        <p>Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice.</p>
-                                        <p>Lorem Ipsum a fost macheta standard a industriei încă din secolul al XVI-lea, când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru a crea o carte demonstrativă pentru literele respective.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="question d-flex flex-nowrap justify-content-between">
-                                    <p>In posuere metus dignissim, euismod dui in, euismod mi.</p>
-                                    <span class="indicator">
-                                        <i class="fas fa-fw fa-chevron-right ind-non-active"></i>
-                                        <i class="fas fa-fw fa-chevron-down ind-active"></i>
-                                    </span>
-                                </div>
-                                <div class="answer">
-                                    <div class="ans-text">
-                                        <p>Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice.</p>
-                                        <p>Lorem Ipsum a fost macheta standard a industriei încă din secolul al XVI-lea, când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru a crea o carte demonstrativă pentru literele respective.</p>
+                                        <p>Plata se face la livrare, clientul plătind valoarea produselor conform bonului fiscal din magazin, plus taxa de transport.</p>
+                                        <p>Open Road nu percepe adaos comercial, produsele fiind cumpărate la prețul afișat pe site.</p>
+                                        <p>Ca modalitate de plată, în prezent există doar varianta de plată cash.</p>
                                     </div>
                                 </div>
                             </li>
