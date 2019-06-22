@@ -8,7 +8,9 @@
 
 <div class="hero home-hero d-flex align-items-center">
     <div class="container">
-        <h3 class="text-primary text-uppercase text-center"><span><?php echo SITE; ?></span></h3>
+        <div class="home-logo text-center mb-5">
+            <img src="<?php echo PATH_IMG; ?>logo.png" alt="">
+        </div>
         <h1><?php echo TAGLINE; ?></h1>
         <div class="row justify-content-center">
             <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">

@@ -22,6 +22,5 @@
                 </form>
             </div>
         </div>
-        <div class="text-center mt-2"><small><a href="">Resetare parola</a></small></div>
     </div>
 </div>
