@@ -4,7 +4,7 @@
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-4">
                             <h6>Misiune</h6>
-                            <p>E un fapt bine stabilit că cititorul va fi sustras de conţinutul citibil al unei pagini atunci când se uită la aşezarea în pagină. Scopul utilizării a Lorem Ipsum, este acela că are o distribuţie a literelor mai mult sau mai puţin normale, faţă de utilizarea</p>
+                            <p>Tot ceea ce ne dorim este să ajutăm utilizatorii să economisească timp prețios pentru ei. Ei își pot folosi la altceva timpul petrecut stând la coadă în magazin și făcându-și singuri cumpărăturile.</p>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <h6>Quick links</h6>

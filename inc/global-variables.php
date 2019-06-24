@@ -3,7 +3,7 @@
 define("SITE", "Open Road");
 define("TAGLINE", "Always on the road for our customer's desire");
 define("CURRENCY", "RON");
-define("SHIPPING_PRICE", 25);
+define("SHIPPING_PRICE", 10);
 
 // Define URL
 define("ROOT_PATH", "/openroad/");
